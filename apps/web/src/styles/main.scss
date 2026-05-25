@@ -1,0 +1,22 @@
+// 7-1 Sass Architecture — import order matters
+
+// Abstracts (no output — variables, mixins, functions)
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+@use 'abstracts/functions' as *;
+
+// Base
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/globals';
+@use 'base/animations';
+
+// Layout
+@use 'layout/grid';
+@use 'layout/header';
+
+// Components
+@use 'components/button';
+
+// Pages
+@use 'pages/home';

@@ -1,0 +1,6 @@
+# Typefac
+
+Salon: Cinzel
+Shicuka: Great Vibe
+Title: Cinzel
+Body, input and more: BIZ UDPMincho
