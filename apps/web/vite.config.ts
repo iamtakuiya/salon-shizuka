@@ -8,6 +8,7 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
       '@shared': path.resolve(__dirname, '../../shared'),
+      '@store': path.resolve(__dirname, '../../shared'),
     },
   },
   server: {
@@ -24,7 +25,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         // Auto-import abstracts into every SCSS file
-        additionalData: `@use "@/styles/abstracts/variables" as *; @use "@/styles/abstracts/mixins" as *;`,
+        // additionalData: `@use "@/styles/abstracts/variables" as *; @use "@/styles/abstracts/mixins" as *;`, this is cause error
       },
     },
   },

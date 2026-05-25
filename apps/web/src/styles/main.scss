@@ -1,15 +1,10 @@
 // 7-1 Sass Architecture — import order matters
 
-// Abstracts (no output — variables, mixins, functions)
-@use 'abstracts/variables' as *;
-@use 'abstracts/mixins' as *;
-@use 'abstracts/functions' as *;
+// Abstracts first — must come before everything
+@use 'abstracts/index' as a;
 
 // Base
-@use 'base/reset';
-@use 'base/typography';
-@use 'base/globals';
-@use 'base/animations';
+@use 'base/index';
 
 // Layout
 @use 'layout/grid';

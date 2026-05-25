@@ -1,3 +1,5 @@
+@use '../abstracts/variables' as *;
+
 // ─── Breakpoint Mixins ───────────────────────────────
 @mixin tablet {
   @media (min-width: #{$bp-tablet}) { @content; }

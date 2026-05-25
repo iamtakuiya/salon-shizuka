@@ -18,9 +18,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@shared/*": ["../../shared/*"]
+      "@shared/*": ["../../shared/*"],
+      "@store/*": ["../../store/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "src/types/scss.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
