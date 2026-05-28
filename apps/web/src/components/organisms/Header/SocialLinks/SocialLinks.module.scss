@@ -1,0 +1,17 @@
+.social__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-2;
+  color: $color-text-muted;
+  transition: color $transition-base;
+  @include focus-ring;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+.social__icon {
+  pointer-events: none; // clicks hit the <a>, not the SVG
+}

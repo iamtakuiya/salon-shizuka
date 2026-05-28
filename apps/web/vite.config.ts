@@ -1,14 +1,17 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import svgr from 'vite-plugin-svgr';
 import path from 'path';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), svgr()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@assets': path.resolve(__dirname, './src/assets/'),
       '@shared': path.resolve(__dirname, '../../shared'),
       '@store': path.resolve(__dirname, '../../shared'),
+      '@styles': path.resolve(__dirname, './src/styles'),
     },
   },
   server: {
@@ -25,7 +28,11 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         // Auto-import abstracts into every SCSS file
-        // additionalData: `@use "@/styles/abstracts/variables" as *; @use "@/styles/abstracts/mixins" as *;`, this is cause error
+        additionalData: `
+          @use "@/styles/abstracts/variables" as *; 
+          @use "@/styles/abstracts/mixins" as *;
+        `, 
+        // this is cause error
       },
     },
   },
