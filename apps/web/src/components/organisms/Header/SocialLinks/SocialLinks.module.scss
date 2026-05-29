@@ -10,8 +10,14 @@
   &:hover {
     color: $color-accent;
   }
+
+  &:hover > .social__icon {
+    // color: blue;
+  }
 }
 
 .social__icon {
   pointer-events: none; // clicks hit the <a>, not the SVG
+  width: 24px;
+  height: 24px;
 }

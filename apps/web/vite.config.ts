@@ -32,7 +32,6 @@ export default defineConfig({
           @use "@/styles/abstracts/variables" as *; 
           @use "@/styles/abstracts/mixins" as *;
         `, 
-        // this is cause error
       },
     },
   },

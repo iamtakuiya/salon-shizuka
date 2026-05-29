@@ -1,4 +1,4 @@
-import ShizukaLogo from '@/assets/svg/logo/logo-nav-mobile.svg?react';
+import ShizukaLogo from '@/assets/svg/01.logo/logo.svg?react';
 
 interface LogoProps {
   className?: string;

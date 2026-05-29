@@ -2,6 +2,7 @@
 
 .menu {
   position: fixed;
+  top: 80px;
   inset: 0;
   z-index: $z-overlay;
   background-color: $color-bg;
@@ -12,21 +13,35 @@
   pointer-events: none; // controlled by JS
   // visibility + opacity handled by GSAP (autoAlpha)
 
+  --social: 20vh;
+  min-height: 592px;
+  height: calc(100vh - var(--social));
+  width: 100%;
+  position: fixed;
+  top: 80px;
+
+
   // Only show on mobile — hide on laptop+
   @include laptop {
     display: none;
   }
 }
 
+// ─── Nav Bar ────────────────────────────────────────
+.menu__navbar {
+  width: 100%;
+}
+
 // ─── Nav List ────────────────────────────────────────
 .menu__list {
   list-style: none;
-  margin: 0;
+  margin: auto;
   padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: $space-8;
+  text-align: center;
 }
 
 .menu__item {
@@ -72,6 +87,7 @@
   left: 50%;
   transform: translateX(-50%);
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: $space-8;
   opacity: 0; // initial state — GSAP animates this
@@ -95,4 +111,13 @@
     outline-offset: 3px;
     border-radius: 2px;
   }
+}
+
+.mobile__socialWrapper {
+  background-color: $color-bg-97;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  min-height: 88px;
+  width: 100%;
+  justify-content: center;
 }

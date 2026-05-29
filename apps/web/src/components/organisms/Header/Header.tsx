@@ -13,20 +13,14 @@ import LogoWrapper from './LogoWrapper/LogoWrapper';
 import DesktopNav from './DesktopNav/DesktopNav';
 import { SocialLinks } from './SocialLinks/SocialLinks';
 import MobileMenu from './MobileMenu/MobileMenu';
-
 // Config
-const SOCIAL_LINKS = [
-  { label: 'Facebook',  href: 'https://facebook.com',  icon: 'Facebook'  },
-  { label: 'Instagram', href: 'https://instagram.com', icon: 'Instagram' },
-  { label: 'LinkedIn',  href: 'https://linkedin.com',  icon: 'LinkedIn'  },
-  { label: 'YouTube',   href: 'https://youtube.com',   icon: 'YouTube'   },
-] as const;
+import { SOCIAL_LINKS } from '@/config/navigation';
 
 export default function Header() {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.ui.mobileMenuOpen);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
-  const [isMobile, setIsMobile] = useState();
+  // const [isMobile, setIsMobile] = useState();
 
   // Close on ESC key
   useEffect(() => {
@@ -54,15 +48,15 @@ export default function Header() {
             align="center"
             className={styles.header__navbar}
           >
-            <LogoWrapper className={styles.header__logo}>
+            <LogoWrapper className={styles.header__logoWrapper}>
               <Link href="#home" aria-label="Salon Shizuka - ホームへ" className={styles.logoWrapper__link}>
-                <Logo width={85} height={32} />
+                <Logo className={styles.header__logo} width={85} height={32} />
               </Link>
             </LogoWrapper>
             <DesktopNav />
-            {!isMobile && (
+            <div className={styles.header__socialWrapper}>
               <SocialLinks items={SOCIAL_LINKS} className={styles.header__social} />
-            )}
+            </div>
             <button
               ref={hamburgerRef}
               className={`${styles.header__hamburger} ${isOpen ? styles['header__hamburger--open'] : ''}`}

@@ -1,8 +1,8 @@
-import FaceBookIcon from '@/assets/svg/social-icons-m/Facebook.svg?react';
-import InstagramIcon from '@/assets/svg/social-icons-m/Instagram.svg?react';
-import LinkedInIcon from '@/assets/svg/social-icons-m/LinkedIn.svg?react';
-import XIcon from '@/assets/svg/social-icons-m/X.svg?react';
-import YouTubeIcon from '@/assets/svg/social-icons-m/YouTube.svg?react';
+import FaceBookIcon from '@/assets/icons/01.socials/Facebook.svg?react';
+import InstagramIcon from '@/assets/icons/01.socials/Instagram.svg?react';
+import LinkedInIcon from '@/assets/icons/01.socials/LinkedIn.svg?react';
+import XIcon from '@/assets/icons/01.socials/X.svg?react';
+import YouTubeIcon from '@/assets/icons/01.socials/YouTube.svg?react';
 
 const iconMap = {
   Facebook: FaceBookIcon,

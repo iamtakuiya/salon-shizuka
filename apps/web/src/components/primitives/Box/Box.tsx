@@ -1,5 +1,5 @@
 // src/components/primitives/Box/Box.tsx
-import type { ElementType, ComponentPropsWithoutRef } from 'react';
+import React, { type ElementType, ComponentPropsWithoutRef } from 'react';
 import styles from './Box.module.scss';
 import clsx from 'clsx';
 
@@ -13,20 +13,23 @@ type BoxProps<T extends ElementType = 'div'> = {
   className?: string;
 } & Omit<ComponentPropsWithoutRef<T>, 'as'>;
 
-export function Box<T extends ElementType = 'div'>({
-  as,
-  padding,
-  paddingBlock,
-  paddingInline,
-  display,
-  className,
-  children,
-  ...rest
-}: BoxProps<T>) {
-  const Comp = as ?? 'div';
-
+export const Box = React.forwardRef<HTMLElement, BoxProps>(function Box<T extends ElementType = 'div'>(
+  {
+    as,
+    padding,
+    paddingBlock,
+    paddingInline,
+    display,
+    className,
+    children,
+    ...rest
+  }: BoxProps<T>,
+  ref: React.Ref<HTMLElement>
+) {
+  const Comp = (as ?? 'div') as ElementType;
   return (
     <Comp
+      ref={ref}
       className={clsx(
         padding && styles[`padding--${padding}`],
         paddingBlock && styles[`paddingBlock--${paddingBlock}`],
@@ -39,4 +42,4 @@ export function Box<T extends ElementType = 'div'>({
       {children}
     </Comp>
   );
-}
+});

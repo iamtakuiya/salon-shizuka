@@ -1,11 +1,13 @@
 import { useEffect, useRef, PropsWithChildren } from "react";
-import { gsap } from "gsap/gsap-core";
+import { gsap } from "gsap";
 
 import { menuOverlayIn, menuOverlayOut } from '@/animations/gsap/mobileMenu';
 import styles from './MobileMenu.module.scss';
 import { Box } from "@/components/primitives/Box/Box";
-import { Stack } from "@/components/primitives/Stack/Stack";
+import { Row } from "@/components/primitives/Row/Row";
 import { NavLinks } from "@/components/molecules/NavLink/NavLinks";
+import { SocialLinks } from "../SocialLinks/SocialLinks";
+import { SOCIAL_LINKS } from '@/config/navigation';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -23,19 +25,24 @@ export default function MobileMenu({
   const socialRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
-
+  // Set initial hidden state
   useEffect(() => {
     if (!overlayRef.current) return;
     gsap.set(overlayRef.current, { autoAlpha: 0 });
   }, []);
 
+  // Animate in/out when isOpen changes
   useEffect(() => {
     if (!overlayRef.current) return;
+
+    // Kill any running timeline
+    timelineRef.current?.kill();
 
     const navEls = navItemsRef.current.filter(Boolean);
     const socialEl = socialRef.current;
 
     if (isOpen) {
+      // Make overlay visible before animating
       overlayRef.current.style.pointerEvents = 'all';
       timelineRef.current = menuOverlayIn(
         overlayRef.current,
@@ -67,17 +74,21 @@ export default function MobileMenu({
       aria-label="Navigation menu"
       {...rest}
     > 
-      <nav 
+      <nav
+        className={styles.menu__navbar} 
         aria-label="Mobile navigation"
       >
-        <Stack as="ul" className={styles.menu__list}>
+        <Row as="ul" className={styles.menu__list}>
           <NavLinks 
             itemClassName={styles.menu__item}
             linkClassName={styles.menu__link}
             itemRef={setNavItemRef}
           />
           {children}
-        </Stack>
+        </Row>
+        <div ref={socialRef} className={styles.mobile__social}>
+          <SocialLinks items={SOCIAL_LINKS} className={styles.mobile__socialWrapper} />
+        </div>
       </nav>
     </Box>
   );

@@ -3,16 +3,11 @@ import { Row } from '@/components/primitives/Row/Row';
 import { Link } from '@/components/atoms/Link/Link';
 import { Icon } from '@/components/atoms/Icon/Icon';
 
-// Type for one item in the list
-interface SocialLinkItem {
-  label: string;
-  href:  string;
-  icon:  'Facebook' | 'Instagram' | 'LinkedIn' | 'YouTube'; // should be lowercase
-}
+// Props for the component – use the type from config to stay in sync
+import type { SocialLinkItem } from '@/config/navigation';
 
-// Props for the component
 interface SocialLinksProps {
-  items: readonly SocialLinkItem[]; // readonly — matches "as const" arrays
+  items: readonly SocialLinkItem[]; // matches the config definition
   className?: string;
 }
 
@@ -28,8 +23,8 @@ export function SocialLinks({ items, className }: SocialLinksProps) {
         >
           <Icon
             icon={icon}
-            width={20}
-            height={20}
+            // width={24}
+            // height={24}
             className={styles.social__icon}
             aria-hidden="true"
           />

@@ -1,27 +1,31 @@
 // No @use here — vite.config.ts additionalData already injects abstracts
 
 .header {
-  // position: fixed;
-  // inset-inline: 0;
-  // top: 0;
-  // z-index: $z-nav;
-  // height: 80px;
-  // background-color: rgba($color-bg, 0.95);
-  // backdrop-filter: blur(8px);
-  // border-bottom: 1px solid $color-border;
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: $z-nav;
+  height: 80px;
+  background-color: rgba($color-bg, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid $color-border;
 }
 
 .header__navbar {
   height: 100%;
 }
 
-.header__social {
+.header__socialWrapper {
   display: none;
 
   @include laptop {
-    display: flex;
+    display: flex !important;
   }
 }
+
+// .header__logoWrapper {}
+
+// .header__logo > * {}
 
 .header__hamburger {
   display: flex;
