@@ -3,8 +3,8 @@ import { useAppDispatch, useAppSelector } from '@/app/store/store';
 import { toggleMobileMenu, closeMobileMenu } from '@/app/store/slices/uiSlice';
 import styles from './Header.module.scss';
 
-import { Container } from '@/components/primitives/Container/Container';
-import { Row } from '@/components/primitives/Row/Row';
+import { Container } from '@/components/01.primitives/Container/Container';
+import { Row } from '@/components/01.primitives/Row/Row';
 // import { Box } from '@/components/primitives/Box/Box';
 import { Logo } from '@/components/atoms/Logo/Logo';
 // import { Icon } from '@/components/atoms/Icon/Icon';
@@ -13,6 +13,7 @@ import LogoWrapper from './LogoWrapper/LogoWrapper';
 import DesktopNav from './DesktopNav/DesktopNav';
 import { SocialLinks } from './SocialLinks/SocialLinks';
 import MobileMenu from './MobileMenu/MobileMenu';
+import { Button } from '@/components/atoms/Button/Button';
 // Config
 import { SOCIAL_LINKS } from '@/config/navigation';
 
@@ -57,7 +58,7 @@ export default function Header() {
             <div className={styles.header__socialWrapper}>
               <SocialLinks items={SOCIAL_LINKS} className={styles.header__social} />
             </div>
-            <button
+            <Button
               ref={hamburgerRef}
               className={`${styles.header__hamburger} ${isOpen ? styles['header__hamburger--open'] : ''}`}
               onClick={() => dispatch(toggleMobileMenu())}
@@ -68,7 +69,7 @@ export default function Header() {
               <span className={styles.header__hamburgerBar} />
               <span className={styles.header__hamburgerBar} />
               <span className={styles.header__hamburgerBar} />
-            </button>
+            </Button>
           </Row>
         </Container>
       </header>

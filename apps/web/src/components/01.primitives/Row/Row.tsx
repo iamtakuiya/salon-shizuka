@@ -2,7 +2,7 @@
 import React, { 
   type ElementType, 
   type ComponentPropsWithoutRef,
-  type ComponentPropsWithRef,
+  // type ComponentPropsWithRef,
 } from 'react';
 
 import styles from './Row.module.scss';
@@ -20,14 +20,13 @@ type RowOwnProps<T extends ElementType> = {
 type RowProps<T extends ElementType> = RowOwnProps<T> & 
   Omit<ComponentPropsWithoutRef<T>, keyof RowOwnProps<T>>;
 
+// Updated this type definition to match how React handles refs internally
 type RowComponent = <T extends ElementType = 'div'>(
-  props: RowProps<T> & {
-    ref?: ComponentPropsWithRef<T>['ref'];
-  }
+  props: RowProps<T> & React.RefAttributes<any>
 ) => React.ReactElement | null;
 
-export const Row: RowComponent = React.forwardRef(function Row
-<T extends ElementType = 'div'>(
+// Cast React.forwardRef as RowComponent
+export const Row = React.forwardRef(function Row<T extends ElementType = 'div'>(
   {
     as,
     gap = 'md',
@@ -38,7 +37,8 @@ export const Row: RowComponent = React.forwardRef(function Row
     children,
     ...rest
   }: RowProps<T>,
-  ref: ComponentPropsWithRef<T>['ref']
+  // Use React.ForwardedRef<any> here to bypass internal forwardRef limitations safely
+  ref: React.ForwardedRef<any>
 ) {
   const Comp = as || 'div';
 
@@ -58,4 +58,4 @@ export const Row: RowComponent = React.forwardRef(function Row
       {children}
     </Comp>
   );
-});
+}) as RowComponent;

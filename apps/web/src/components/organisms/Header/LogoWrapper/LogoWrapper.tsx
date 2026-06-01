@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import styles from './LogoWrapper.module.scss';
 
 // Components
-import { Box } from '@/components/primitives/Box/Box';
+import { Box } from '@/components/01.primitives/Box/Box';
 
 
 interface LogoWrapperProps extends ComponentPropsWithoutRef<typeof Box> {

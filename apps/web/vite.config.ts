@@ -28,9 +28,12 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         // Auto-import abstracts into every SCSS file
+        // Inject variables, mixins, and functions into every SCSS file automatically.
+        // Individual component SCSS files must NOT repeat these @use statements.
         additionalData: `
           @use "@/styles/abstracts/variables" as *; 
           @use "@/styles/abstracts/mixins" as *;
+          @use "@/styles/abstracts/functions" as *;
         `, 
       },
     },

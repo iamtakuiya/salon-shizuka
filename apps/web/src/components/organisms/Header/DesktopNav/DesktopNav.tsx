@@ -1,5 +1,5 @@
 import styles from './DesktopNav.module.scss';
-import { Row } from '@/components/primitives/Row/Row';
+import { Row } from '@/components/01.primitives/Row/Row';
 import { NavLinks } from '@/components/molecules/NavLink/NavLinks';
 
 export default function DesktopNav() {

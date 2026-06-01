@@ -1,5 +1,5 @@
 import styles from './SocialLinks.module.scss';
-import { Row } from '@/components/primitives/Row/Row';
+import { Row } from '@/components/01.primitives/Row/Row';
 import { Link } from '@/components/atoms/Link/Link';
 import { Icon } from '@/components/atoms/Icon/Icon';
 
