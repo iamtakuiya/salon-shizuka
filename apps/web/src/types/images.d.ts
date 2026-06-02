@@ -1,5 +1,17 @@
-// Type definition for SVG file
+declare module '*.png' {
+  const value: string;
+  export default value;
+}
+declare module '*.jpg' {
+  const value: string;
+  export default value;
+}
+declare module '*.jpeg' {
+  const value: string;
+  export default value;
+}
 
+// Type definition for SVG file
 declare module "*.svg" {
   import * as React from 'react';
 

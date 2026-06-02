@@ -1,0 +1,76 @@
+// Hospitality Section styles
+.hospitality {
+  position: relative;
+  overflow: hidden;
+  background: $color-bg;
+  padding: $space-4 $space-2;
+  height: 47px;
+}
+
+.hospitality__container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile – rolling animation */
+@media (max-width: 767px) {
+  .hospitality__wrapper {
+    display: flex;
+    white-space: nowrap;
+    will-change: transform;
+  }
+}
+
+/* Tablet and up – static side‑by‑side layout */
+@media (min-width: 768px) {
+  .hospitality__wrapper {
+    display: flex;
+    gap: $space-8;
+    justify-content: center;
+  }
+}
+
+.hospitality__text {
+  font-family: $font-title;
+  font-size: clamp(1.5rem, 6vw, 2.5rem);
+  color: $color-text;
+  padding-right: 4rem; // space between repeats (used on mobile)
+}
+
+// Option 1
+.rotating {
+  overflow: hidden;
+  height: 3rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rotating__text {
+  text-align: center;
+
+  font-size: 1rem;
+  line-height: 1.5;
+
+  white-space: nowrap;
+}
+
+// Option 2
+.viewport {
+  height: 100px;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  height: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

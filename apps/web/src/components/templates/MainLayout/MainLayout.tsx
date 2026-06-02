@@ -1,6 +1,7 @@
-import Header from "@/components/organisms/Header/Header"
-import Hero from "@/components/organisms/Hero/Hero";
+import Header from "@/components/organisms/01.Header/Header"
+import Hero from "@/components/organisms/02.Hero/Hero";
 import styles from "./MainLayout.module.scss";
+import HospitalityText from "@/components/organisms/03.HospitalitySection/HospitalityText";
 
 // Placeholder — assemble all section organisms here as you build them
 export const MainLayout = () => {
@@ -9,6 +10,10 @@ export const MainLayout = () => {
       <Header />
       <main className={styles.main}>
         <Hero />
+        <HospitalityText />
+
+        <br />
+        <hr />
         concept
         gallery
         owner

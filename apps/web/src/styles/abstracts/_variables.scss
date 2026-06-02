@@ -38,8 +38,8 @@ $color-accent-85: hsla(41, 79%, 85%, 1);
 $color-accent-80: hsla(41, 78%, 80%, 1); 
 $color-accent-65: hsla(41, 78%, 65%, 1);
 // --- UI Utilities (Dividers & Overlays) ---
-$color-overlay-bg: hsla(36, 19%, 71%, 0.25); /* With Opacity 25% */
-$color-overlay-bg: hsla(0, 0%, 0%, 0.20); /* With Opacity 20% */
+$color-overlay-bg-25: hsla(37, 20%, 71%, 0.25); /* With Opacity 25% */
+$color-overlay-bg-20: hsla(0, 0%, 0%, 0.20); /* With Opacity 20% */
 $color-border-8: hsla(202, 18%, 24%, 0.08); /* With Opacity 8%, for divider */
 
 $color-chart-color: linear-gradient(to bottom, hsla(41,78.9%,85.1%,0.967) 19.7%,hsla(41,77.7%,64.9%,0.923) 19.71%,hsla(41,77.7%,64.9%,0.923) 100%);

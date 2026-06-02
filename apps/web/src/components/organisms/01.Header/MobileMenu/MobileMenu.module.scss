@@ -13,13 +13,9 @@
   pointer-events: none; // controlled by JS
   // visibility + opacity handled by GSAP (autoAlpha)
 
-  --social: 20vh;
-  min-height: 592px;
-  height: calc(100vh - var(--social));
+  height: 100vh;
   width: 100%;
   position: fixed;
-  top: 80px;
-
 
   // Only show on mobile — hide on laptop+
   @include laptop {
@@ -29,6 +25,11 @@
 
 // ─── Nav Bar ────────────────────────────────────────
 .menu__navbar {
+  position: relative;
+  top: 60px;
+  --social: 20vh;
+  min-height: 592px;
+  height: calc(100vh - var(--social));
   width: 100%;
 }
 
