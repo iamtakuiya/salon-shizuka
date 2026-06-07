@@ -1,5 +1,11 @@
-import type { ElementType, ComponentPropsWithoutRef } from 'react';
-import { Surface } from '../Surface/Surface';
+import React, {
+  forwardRef,
+  ReactNode,
+  type ElementType,
+  type ComponentPropsWithoutRef,
+  type ComponentPropsWithRef,
+} from 'react';
+import { Surface } from '../01.Surface/Surface';
 import styles from './Card.module.scss';
 import clsx from 'clsx';
 
@@ -7,37 +13,54 @@ import clsx from 'clsx';
 // Use Surface directly when you need full variant control.
 // Use Card when the content is clearly a grouped, elevated unit.
 
+// Polymorphic types
 type CardVariant = 'default' | 'interactive';
 
-type CardProps<T extends ElementType = 'div'> = {
-  as?:       T;
-  variant?:  CardVariant;
-  padding?:  'sm' | 'md' | 'lg';
+// Switch to ComponentPropsWithRef so 'ref' is included in the types
+type CardOwnProps = {
+  variant?: CardVariant;
+  padding?: 'sm' | 'md' | 'lg' | 'none';
   className?: string;
-} & Omit<ComponentPropsWithoutRef<T>, 'as'>;
+  children?: React.ReactNode;
+};
 
-export function Card<T extends ElementType = 'div'>({
-  as,
-  variant = 'default',
-  padding = 'md',
-  className,
-  children,
-  ...rest
-}: CardProps<T>) {
-  return (
-    <Surface
-      as={as}
-      variant="elevated"
-      padding={padding}
-      radius="md"
-      className={clsx(
-        styles.card,
-        styles[`card--${variant}`],
-        className
-      )}
-      {...rest}
-    >
-      {children}
-    </Surface>
-  );
-}
+type CardProps<T extends ElementType> =
+  CardOwnProps & {
+    as?: T;
+  } & Omit<ComponentPropsWithoutRef<T>, keyof CardOwnProps | 'as'>;
+
+// Polymorphic component type
+// type CardComponent = <T extends ElementType = 'div'>(
+//   props: CardProps<T> & {
+//     ref?: ComponentPropsWithRef<T>['ref'];
+//   }
+// ) => React.ReactElement | null;
+
+
+// Define the inner component with forwardRef
+export const Card = forwardRef<HTMLDivElement, CardOwnProps>((
+    {
+      variant = 'default',
+      padding = 'md',
+      className,
+      children,
+    },
+    ref
+  ) => {
+    return (
+      <Surface
+        ref={ref}
+        variant="elevated"
+        padding={padding}
+        radius="md"
+        className={clsx(
+          styles.card,
+          styles[`card--${variant}`],
+          className
+        )}
+      >
+        {children}
+      </Surface>
+    );
+  }
+)

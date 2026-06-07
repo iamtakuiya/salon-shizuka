@@ -2,9 +2,11 @@
 .hospitality {
   position: relative;
   overflow: hidden;
-  background: $color-bg;
+  background: $color-accent-90;
   padding: $space-4 $space-2;
   height: 47px;
+  display: grid;
+  place-content: center;
 }
 
 .hospitality__container {

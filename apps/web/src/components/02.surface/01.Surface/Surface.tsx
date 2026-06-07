@@ -1,4 +1,9 @@
-import type { ElementType, ComponentPropsWithoutRef } from 'react';
+import React, {
+  forwardRef,
+  type ElementType,
+  type ComponentPropsWithoutRef,
+  type ComponentPropsWithRef,
+} from 'react';;
 import styles from './Surface.module.scss';
 import clsx from 'clsx';
 
@@ -14,15 +19,26 @@ export type SurfaceVariant =
 export type SurfacePadding = 'none' | 'sm' | 'md' | 'lg' | 'xl';
 export type SurfaceRadius  = 'none' | 'sm' | 'md' | 'lg' | 'full';
 
-type SurfaceProps<T extends ElementType = 'div'> = {
-  as?:       T;
-  variant?:  SurfaceVariant;
-  padding?:  SurfacePadding;
-  radius?:   SurfaceRadius;
+type SurfaceOwnProps = {
+  variant?: SurfaceVariant;
+  padding?: SurfacePadding;
+  radius?: SurfaceRadius;
   className?: string;
-} & Omit<ComponentPropsWithoutRef<T>, 'as'>;
+};
 
-export function Surface<T extends ElementType = 'div'>({
+type SurfaceProps<T extends ElementType> =
+  SurfaceOwnProps & {
+    as?: T;
+  } & Omit<ComponentPropsWithoutRef<T>, keyof SurfaceOwnProps | 'as'>;
+
+type SurfaceComponent = <T extends ElementType = 'div'>(
+  props: SurfaceProps<T> & {
+    ref?: ComponentPropsWithRef<T>['ref'];
+  }
+) => React.ReactElement | null;
+
+const SurfaceRender = <T extends ElementType = 'div'>(
+{
   as,
   variant  = 'default',
   padding  = 'none',
@@ -30,11 +46,14 @@ export function Surface<T extends ElementType = 'div'>({
   className,
   children,
   ...rest
-}: SurfaceProps<T>) {
+}: SurfaceProps<T>,
+ref: ComponentPropsWithRef<T>['ref']
+) => {
   const Comp = as ?? 'div';
 
   return (
     <Comp
+      ref={ref}
       className={clsx(
         styles.surface,
         styles[`surface--${variant}`],
@@ -48,3 +67,7 @@ export function Surface<T extends ElementType = 'div'>({
     </Comp>
   );
 }
+
+export const Surface = forwardRef(SurfaceRender) as SurfaceComponent;
+
+// Surface.displayName = 'Surface';

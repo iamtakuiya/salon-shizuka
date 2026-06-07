@@ -1,5 +1,5 @@
 import type { ElementType, ComponentPropsWithoutRef } from 'react';
-import { Surface } from '../Surface/Surface';
+import { Surface } from '../01.Surface/Surface';
 import styles from './Panel.module.scss';
 import clsx from 'clsx';
 
