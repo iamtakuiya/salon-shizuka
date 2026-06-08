@@ -5,7 +5,7 @@ import { menuOverlayIn, menuOverlayOut } from '@/animations/gsap/mobileMenu';
 import styles from './MobileMenu.module.scss';
 import { Box } from "@/components/01.primitives/Box/Box";
 import { Row } from "@/components/01.primitives/Row/Row";
-import { NavLinks } from "@/components/molecules/NavLink/NavLinks";
+import { NavLinks } from "@/components/05.molecules/NavLink/NavLinks";
 import { SocialLinks } from "../SocialLinks/SocialLinks";
 import { SOCIAL_LINKS } from '@/config/navigation';
 

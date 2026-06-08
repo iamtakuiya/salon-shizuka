@@ -1,4 +1,4 @@
-import { Link } from '@/components/atoms/Link/Link';
+import { Link } from '@/components/04.atoms/Link/Link';
 import { NAV_LINKS } from '@/config/navigation';
 
 interface NavLinksProps {

@@ -6,14 +6,14 @@ import styles from './Header.module.scss';
 import { Container } from '@/components/01.primitives/Container/Container';
 import { Row } from '@/components/01.primitives/Row/Row';
 // import { Box } from '@/components/primitives/Box/Box';
-import { Logo } from '@/components/atoms/Logo/Logo';
+import { Logo } from '@/components/04.atoms/Logo/Logo';
 // import { Icon } from '@/components/atoms/Icon/Icon';
-import { Link } from '@/components/atoms/Link/Link';
+import { Link } from '@/components/04.atoms/Link/Link';
 import LogoWrapper from './LogoWrapper/LogoWrapper';
 import DesktopNav from './DesktopNav/DesktopNav';
 import { SocialLinks } from './SocialLinks/SocialLinks';
 import MobileMenu from './MobileMenu/MobileMenu';
-import { Button } from '@/components/atoms/Button/Button';
+import { Button } from '@/components/04.atoms/Button/Button';
 // Config
 import { SOCIAL_LINKS } from '@/config/navigation';
 

@@ -1,7 +1,7 @@
 import styles from './SocialLinks.module.scss';
 import { Row } from '@/components/01.primitives/Row/Row';
-import { Link } from '@/components/atoms/Link/Link';
-import { Icon } from '@/components/atoms/Icon/Icon';
+import { Link } from '@/components/04.atoms/Link/Link';
+import { Icon } from '@/components/04.atoms/Icon/Icon';
 
 // Props for the component – use the type from config to stay in sync
 import type { SocialLinkItem } from '@/config/navigation';

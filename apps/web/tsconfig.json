@@ -24,6 +24,6 @@
       "@styles/*": ["./src/styles/*"],
     }
   },
-  "include": ["src", "src/**/*"], // This covers everything inside src, including images.d.ts
+  "include": ["src", "src/**/*", "../../../a-scaffold"], // This covers everything inside src, including images.d.ts
   "references": [{ "path": "./tsconfig.node.json" }]
 }

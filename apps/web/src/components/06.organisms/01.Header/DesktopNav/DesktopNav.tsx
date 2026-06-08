@@ -1,6 +1,6 @@
 import styles from './DesktopNav.module.scss';
 import { Row } from '@/components/01.primitives/Row/Row';
-import { NavLinks } from '@/components/molecules/NavLink/NavLinks';
+import { NavLinks } from '@/components/05.molecules/NavLink/NavLinks';
 
 export default function DesktopNav() {
   return (

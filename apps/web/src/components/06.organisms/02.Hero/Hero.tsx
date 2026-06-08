@@ -8,8 +8,8 @@ import { Container } from "@/components/01.primitives/Container/Container";
 import { Stack } from "@/components/01.primitives/Stack/Stack";
 import { Box } from "@/components/01.primitives/Box/Box";
 import LogoWrapper from "../01.Header/LogoWrapper/LogoWrapper";
-import { Logo } from "@/components/atoms/Logo/Logo";
-import { Button } from "@/components/atoms/Button/Button";
+import { Logo } from "@/components/04.atoms/Logo/Logo";
+import { Button } from "@/components/04.atoms/Button/Button";
 
 import styles from "./Hero.module.scss";
 import heroMobileImg from "@assets/images/01.hero/hero-mobile.png";

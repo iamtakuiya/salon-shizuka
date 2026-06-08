@@ -1,9 +1,9 @@
-import Header from "@/components/organisms/01.Header/Header"
-import Hero from "@/components/organisms/02.Hero/Hero";
+import Header from "@/components/06.organisms/01.Header/Header"
+import Hero from "@/components/06.organisms/02.Hero/Hero";
 import styles from "./MainLayout.module.scss";
-import HospitalityText from "@/components/organisms/03.HospitalitySection/HospitalityText";
-import ConceptSection from "@/components/organisms/04.ConceptSection/ConceptSection";
-import GallerySlider from "@/components/organisms/05.GallerySlider/GallerySlider";
+import HospitalityText from "@/components/06.organisms/03.HospitalitySection/HospitalityText";
+import ConceptSection from "@/components/06.organisms/04.ConceptSection/ConceptSection";
+import {SalonGallerySection } from "@/components/06.organisms/05.SalonGallerySection/SalonGallerySection";
 
 // Placeholder — assemble all section organisms here as you build them
 export const MainLayout = () => {
@@ -14,7 +14,7 @@ export const MainLayout = () => {
         <Hero />
         <HospitalityText />
         <ConceptSection />
-        <GallerySlider />
+        <SalonGallerySection />
 
         <br />
         <hr />
@@ -30,3 +30,4 @@ export const MainLayout = () => {
     </>
   );
 };
+
