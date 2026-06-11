@@ -4,6 +4,9 @@ import styles from "./MainLayout.module.scss";
 import HospitalityText from "@/components/06.organisms/03.HospitalitySection/HospitalityText";
 import ConceptSection from "@/components/06.organisms/04.ConceptSection/ConceptSection";
 import {SalonGallerySection } from "@/components/06.organisms/05.SalonGallerySection/SalonGallerySection";
+import OwnerSection from "@/components/06.organisms/07.OwnerSection/OwnerSection";
+import { StyleGuideTeaser } from "@/components/06.organisms/08.StyleGuideTeaser/StyleGuideTeaser";
+import MenuSection from "@/components/06.organisms/09.MenuSection/MenuSection";
 
 // Placeholder — assemble all section organisms here as you build them
 export const MainLayout = () => {
@@ -15,12 +18,11 @@ export const MainLayout = () => {
         <HospitalityText />
         <ConceptSection />
         <SalonGallerySection />
-
+        <OwnerSection />
+        <StyleGuideTeaser />
+        <MenuSection />
         <br />
         <hr />
-        owner
-        style
-        menu
         voice
         newsletter
         reservation

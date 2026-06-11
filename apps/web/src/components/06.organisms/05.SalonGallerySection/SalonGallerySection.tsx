@@ -44,7 +44,7 @@ export function SalonGallerySection() {
     next,
     prev,
     goTo,
-    totalSteps,
+    // totalSteps,
   } = useSlider({
     totalItems: ITEMS.length,
     visibleItems: 3,
