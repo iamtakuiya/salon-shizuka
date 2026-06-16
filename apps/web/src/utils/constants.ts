@@ -24,6 +24,7 @@ export interface MenuCategory {
   category: string;
   categoryEn: string;
   categoryDescription?: string;
+  img?: string;
   /** Shown in brackets next to the category title, e.g. "シャンプー・ブロー別" */
   includes?: string;
   /** Shown in a bordered note box at the bottom of the category */
@@ -31,244 +32,265 @@ export interface MenuCategory {
   items: MenuItem[];
 }
 
+
 // ─── Menu data ───────────────────────────────────────────────────────────────
+import SERVICE01 from '@/assets/images/06.services/service-1-m.png';
+import SERVICE02 from '@/assets/images/06.services/service-2-m.png';
+import SERVICE03 from '@/assets/images/06.services/service-3-m.png';
+import SERVICE04 from '@/assets/images/06.services/service-4-m.png';
+import SERVICE05 from '@/assets/images/06.services/service-5-m.png';
+import SERVICE06 from '@/assets/images/06.services/service-6-m.png';
 
 export const MENU_CATEGORIES: MenuCategory[] = [
   {
-    id: 'cut',
-    category: 'ヘアカット',
-    categoryEn: 'Hair Cut',
+    id: "cut",
+    category: "ヘアカット",
+    categoryEn: "Hair Cut",
     categoryDescription:
-      '骨格や髪質、生え癖を見極め、乾かすだけで美しくまとまる再現性の高いスタイルをご提案します。',
+      "骨格や髪質、生え癖を見極め、乾かすだけで美しくまとまる再現性の高いスタイルをご提案します。",
+    img: SERVICE01,
     items: [
       {
-        name: 'スタンダードカット',
-        nameEn: 'Standard Cut',
-        includes: 'カット・シャンプー・ブロー込',
+        name: "スタンダードカット",
+        nameEn: "Standard Cut",
+        includes: "カット・シャンプー・ブロー込",
         price: 6050,
-        duration: '60分',
-        description: 'お客様の日常に溶け込む、お手入れのしやすいベースカットです。',
+        duration: "60分",
+        description:
+          "お客様の日常に溶け込む、お手入れのしやすいベースカットです。",
       },
       {
-        name: '前髪カット',
-        nameEn: 'Fringe Cut',
+        name: "前髪カット",
+        nameEn: "Fringe Cut",
         price: 1650,
-        duration: '15分',
-        description: '第一印象を左右する繊細なラインを丁寧に整えます。',
+        duration: "15分",
+        description: "第一印象を左右する繊細なラインを丁寧に整えます。",
       },
       {
-        name: '眉カット',
-        nameEn: 'Eyebrow Trim',
+        name: "眉カット",
+        nameEn: "Eyebrow Trim",
         price: 550,
-        duration: '10分',
-        description: 'お顔の骨格に合わせて、ナチュラルで洗練された印象に仕上げます。',
+        duration: "10分",
+        description:
+          "お顔の骨格に合わせて、ナチュラルで洗練された印象に仕上げます。",
       },
     ],
   },
   {
-    id: 'color',
-    category: 'ヘアカラー',
-    categoryEn: 'Hair Color',
+    id: "color",
+    category: "ヘアカラー",
+    categoryEn: "Hair Color",
     categoryDescription:
-      '髪と頭皮への負担を抑えたこだわりの薬剤を使用。あなた本来の肌の透明感を引き出す、柔らかく艶やかな色味を表現します。',
-    includes: 'シャンプー・ブロー別',
+      "髪と頭皮への負担を抑えたこだわりの薬剤を使用。あなた本来の肌の透明感を引き出す、柔らかく艶やかな色味を表現します。",
+    img: SERVICE02,
+    includes: "シャンプー・ブロー別",
     notes:
-      'カラー単品でのご利用の場合は、別途シャンプー・ブロー料金（¥1,980）を頂戴いたします。カット等、他のブロー込みメニューと組み合わせる場合は追加料金はかかりません。',
+      "カラー単品でのご利用の場合は、別途シャンプー・ブロー料金（¥1,980）を頂戴いたします。カット等、他のブロー込みメニューと組み合わせる場合は追加料金はかかりません。",
     items: [
       {
-        name: 'ショート',
-        nameEn: 'Short',
+        name: "ショート",
+        nameEn: "Short",
         price: 6600,
-        duration: '90分',
+        duration: "90分",
       },
       {
-        name: 'ミディアム',
-        nameEn: 'Medium',
+        name: "ミディアム",
+        nameEn: "Medium",
         price: 7150,
-        duration: '100分',
+        duration: "100分",
       },
       {
-        name: 'ロング',
-        nameEn: 'Long',
+        name: "ロング",
+        nameEn: "Long",
         price: 7700,
-        duration: '110分',
+        duration: "110分",
       },
       {
-        name: 'スーパーロング',
-        nameEn: 'Super Long',
+        name: "スーパーロング",
+        nameEn: "Super Long",
         price: 8800,
-        duration: '120分',
+        duration: "120分",
       },
       {
-        name: 'ダブルカラー',
-        nameEn: 'Double Color',
-        includes: 'ケアブリーチ＋カラー',
+        name: "ダブルカラー",
+        nameEn: "Double Color",
+        includes: "ケアブリーチ＋カラー",
         price: 8800,
-        duration: '150分',
+        duration: "150分",
         isStartingPrice: true,
         isAdditionalFee: true,
-        description: '透明感や立体感をより引き出すための特別メニューです。',
+        description: "透明感や立体感をより引き出すための特別メニューです。",
       },
     ],
   },
   {
-    id: 'perm',
-    category: 'スタンダードパーマ',
-    categoryEn: 'Perm',
+    id: "perm",
+    category: "スタンダードパーマ",
+    categoryEn: "Perm",
     categoryDescription:
-      '髪に優しい薬剤で、ふんわりと柔らかな質感を生み出します。',
-    includes: 'カット・シャンプー・ブロー込',
+      "髪に優しい薬剤で、ふんわりと柔らかな質感を生み出します。",
+    img: SERVICE03,
+    includes: "カット・シャンプー・ブロー込",
     items: [
       {
-        name: 'ショート',
-        nameEn: 'Short',
+        name: "ショート",
+        nameEn: "Short",
         price: 12100,
-        duration: '90分',
+        duration: "90分",
       },
       {
-        name: 'ミディアム',
-        nameEn: 'Medium',
+        name: "ミディアム",
+        nameEn: "Medium",
         price: 12650,
-        duration: '100分',
+        duration: "100分",
       },
       {
-        name: 'ロング',
-        nameEn: 'Long',
+        name: "ロング",
+        nameEn: "Long",
         price: 13200,
-        duration: '110分',
+        duration: "110分",
       },
       {
-        name: 'スパイラルパーマ',
-        nameEn: 'Spiral Perm',
+        name: "スパイラルパーマ",
+        nameEn: "Spiral Perm",
         price: 2200,
-        duration: '30分',
+        duration: "30分",
         isStartingPrice: true,
         isAdditionalFee: true,
       },
       {
-        name: 'ポイントパーマ',
-        nameEn: 'Point Perm',
-        includes: 'シャンプー・ブロー別',
+        name: "ポイントパーマ",
+        nameEn: "Point Perm",
+        includes: "シャンプー・ブロー別",
         price: 3850,
-        duration: '60分',
+        duration: "60分",
         isStartingPrice: true,
-        description: '前髪やトップなど、ボリュームが欲しい部分にピンポイントで動きをつけます。',
+        description:
+          "前髪やトップなど、ボリュームが欲しい部分にピンポイントで動きをつけます。",
       },
       {
-        name: 'ストレートパーマ',
-        nameEn: 'Straight Perm',
-        includes: 'シャンプー・ブロー別',
+        name: "ストレートパーマ",
+        nameEn: "Straight Perm",
+        includes: "シャンプー・ブロー別",
         price: 7700,
-        duration: '90分',
+        duration: "90分",
         isStartingPrice: true,
-        description: 'ボリュームを自然に抑え、扱いやすい髪へと導きます。',
+        description: "ボリュームを自然に抑え、扱いやすい髪へと導きます。",
       },
     ],
   },
   {
-    id: 'straight',
-    category: '縮毛矯正',
-    categoryEn: 'Straightening',
+    id: "straight",
+    category: "縮毛矯正",
+    categoryEn: "Straightening",
     categoryDescription:
-      '髪の体力を守る「酸性ストレート」などを用い、シルクのような艶と柔らかな手触りを叶える本格髪質改善です。',
-    includes: 'カット・シャンプー・ブロー込',
+      "髪の体力を守る「酸性ストレート」などを用い、シルクのような艶と柔らかな手触りを叶える本格髪質改善です。",
+    img: SERVICE04,
+    includes: "カット・シャンプー・ブロー込",
     items: [
       {
-        name: 'ショート',
-        nameEn: 'Short',
+        name: "ショート",
+        nameEn: "Short",
         price: 20900,
-        duration: '150分',
+        duration: "150分",
       },
       {
-        name: 'ミディアム',
-        nameEn: 'Medium',
+        name: "ミディアム",
+        nameEn: "Medium",
         price: 22000,
-        duration: '165分',
+        duration: "165分",
       },
       {
-        name: 'ロング',
-        nameEn: 'Long',
+        name: "ロング",
+        nameEn: "Long",
         price: 23100,
-        duration: '180分',
+        duration: "180分",
       },
       {
-        name: 'ポイントストレート',
-        nameEn: 'Point Straight',
-        includes: 'シャンプー・ブロー別',
+        name: "ポイントストレート",
+        nameEn: "Point Straight",
+        includes: "シャンプー・ブロー別",
         price: 6600,
-        duration: '90分',
+        duration: "90分",
         isStartingPrice: true,
-        description: '顔まわりや前髪など、特に気になる部分のクセを綺麗に伸ばします。',
+        description:
+          "顔まわりや前髪など、特に気になる部分のクセを綺麗に伸ばします。",
       },
     ],
   },
   {
-    id: 'treatment',
-    category: 'トリートメント ＆ ヘッドスパ',
-    categoryEn: 'Treatment & Head Spa',
+    id: "treatment",
+    category: "トリートメント ＆ ヘッドスパ",
+    categoryEn: "Treatment & Head Spa",
     categoryDescription:
-      '厳選されたヘアケアプログラムで、髪本来の健やかな美しさと、心安らぐ贅沢な癒やしをお届けします。',
+      "厳選されたヘアケアプログラムで、髪本来の健やかな美しさと、心安らぐ贅沢な癒やしをお届けします。",
+    img: SERVICE05,
     items: [
       {
-        name: 'クイックトリートメント',
-        nameEn: 'Quick Treatment',
-        includes: 'シャンプー・ブロー別',
+        name: "クイックトリートメント",
+        nameEn: "Quick Treatment",
+        includes: "シャンプー・ブロー別",
         price: 3850,
-        duration: '30分',
-        description: 'お急ぎの時にも、髪の表面を滑らかに整えるお手軽なケア。',
+        duration: "30分",
+        description: "お急ぎの時にも、髪の表面を滑らかに整えるお手軽なケア。",
       },
       {
-        name: 'フローディア トリートメント',
-        nameEn: 'Flaudia Treatment',
-        includes: 'シャンプー・ブロー別',
+        name: "フローディア トリートメント",
+        nameEn: "Flaudia Treatment",
+        includes: "シャンプー・ブロー別",
         price: 6050,
-        duration: '45分',
+        duration: "45分",
         description:
-          '髪の記憶を補修する医学発想のシステムトリートメント。芯から潤う本質的な髪質改善を。',
+          "髪の記憶を補修する医学発想のシステムトリートメント。芯から潤う本質的な髪質改善を。",
       },
       {
-        name: '極上ヘッドスパ',
-        nameEn: 'Premium Head Spa',
-        includes: 'シャンプー・ブロー別',
+        name: "極上ヘッドスパ",
+        nameEn: "Premium Head Spa",
+        includes: "シャンプー・ブロー別",
         price: 3850,
-        duration: '30分',
+        duration: "30分",
         description:
-          '日々の疲れや頭皮の緊張をほぐし、根本からの立ち上がりと深いリラクゼーションを促します。',
+          "日々の疲れや頭皮の緊張をほぐし、根本からの立ち上がりと深いリラクゼーションを促します。",
       },
     ],
   },
   {
-    id: 'other',
-    category: 'その他',
-    categoryEn: 'Other',
+    id: "other",
+    category: "その他",
+    categoryEn: "Other",
     categoryDescription:
-      '特別な日のヘアセットや、日常のスタイリングまで幅広くご対応いたします。',
+      "特別な日のヘアセットや、日常のスタイリングまで幅広くご対応いたします。",
+    img: SERVICE06,
     items: [
       {
-        name: 'シャンプー・ブロー',
-        nameEn: 'Shampoo & Blow',
+        name: "シャンプー・ブロー",
+        nameEn: "Shampoo & Blow",
         price: 1980,
-        duration: '30分',
-        description: 'カラーやトリートメント単品メニューと組み合わせてご利用ください。',
+        duration: "30分",
+        description:
+          "カラーやトリートメント単品メニューと組み合わせてご利用ください。",
       },
       {
-        name: 'ヘアセット（アップスタイル）',
-        nameEn: 'Hair Set (Up Style)',
+        name: "ヘアセット（アップスタイル）",
+        nameEn: "Hair Set (Up Style)",
         price: 6050,
-        duration: '60分',
-        description: '結婚式や特別な日のお出かけに、崩れにくく華やかなスタイルを。',
+        duration: "60分",
+        description:
+          "結婚式や特別な日のお出かけに、崩れにくく華やかなスタイルを。",
       },
       {
-        name: 'アレンジ・スタイリング',
-        nameEn: 'Styling',
+        name: "アレンジ・スタイリング",
+        nameEn: "Styling",
         price: 4400,
-        duration: '45分',
+        duration: "45分",
         isStartingPrice: true,
-        description: 'カジュアルなパーティーや、少し気分を上げたい普段の日のお出かけに。',
+        description:
+          "カジュアルなパーティーや、少し気分を上げたい普段の日のお出かけに。",
       },
     ],
   },
 ];
+
 
 export const MENU_FOOTER_NOTES: string[] = [
   '価格は全て税込表示です。',
@@ -319,6 +341,26 @@ export const TIME_SLOTS: string[] = [
   '16:00', '16:30', '17:00', '17:30',
   '18:00', '18:30',
 ];
+
+export const DAYS_JA = ["日", "月", "火", "水", "木", "金", "土"];
+
+export const MONTHS_EN = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+/** Max cards shown in the desktop 2×3 gallery before slider nav appears */
+export const DESKTOP_GRID_CAPACITY = 6;
 
 // ─── Location constants ───────────────────────────────────────────────────────
 

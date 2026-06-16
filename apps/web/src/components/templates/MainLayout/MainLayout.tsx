@@ -7,6 +7,9 @@ import {SalonGallerySection } from "@/components/06.organisms/05.SalonGallerySec
 import OwnerSection from "@/components/06.organisms/07.OwnerSection/OwnerSection";
 import { StyleGuideTeaser } from "@/components/06.organisms/08.StyleGuideTeaser/StyleGuideTeaser";
 import MenuSection from "@/components/06.organisms/09.MenuSection/MenuSection";
+import VoiceSection from "@/components/06.organisms/10.VoiceSection/VoiceSection";
+import NewsletterSection from "@/components/06.organisms/11.NewsletterSection/NewsletterSection";
+import ReservationSection from "@/components/06.organisms/12.ReservationSection/ReservationSection";
 
 // Placeholder — assemble all section organisms here as you build them
 export const MainLayout = () => {
@@ -21,10 +24,11 @@ export const MainLayout = () => {
         <OwnerSection />
         <StyleGuideTeaser />
         <MenuSection />
+        <VoiceSection />
+        <NewsletterSection />
+        <ReservationSection />
         <br />
         <hr />
-        voice
-        newsletter
         reservation
         hours and map
         footer
