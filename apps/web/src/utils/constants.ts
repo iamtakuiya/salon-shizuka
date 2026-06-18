@@ -363,17 +363,73 @@ export const MONTHS_EN = [
 export const DESKTOP_GRID_CAPACITY = 6;
 
 // ─── Location constants ───────────────────────────────────────────────────────
+// Payment Provider Logos
+import visaLogo from "@/assets/icons/payments/Visa.svg";
+import mastercardLogo from "@/assets/icons/payments/Mastercard.svg";
+import googlePayLogo from "@/assets/icons/payments/GooglePay.svg"; 
+import payPalLogo from "@/assets/icons/payments/PayPal.svg";
+
+// Quick Action Icons (Overlaying the Map)
+import mapPinIcon from "@/assets/icons/info/Location.svg";
+import phoneIcon from "@/assets/icons/info/Support.svg";
+import mailIcon from "@/assets/icons/info/Feedback.svg";
 
 export const ADDRESS_JA = '東京都渋谷区神宮前1-1-1';
 export const PHONE      = '03-0000-0000';
+export const MAIL = "salon@example.com";
 export const MAP_URL    = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS_JA)}`;
 
 export const HOURS = [
-  { day: 'Mon', dayJa: '月', open: '10:00', close: '20:00', closed: false },
-  { day: 'Tue', dayJa: '火', open: '10:00', close: '20:00', closed: false },
-  { day: 'Wed', dayJa: '水', open: '',       close: '',       closed: true  },
-  { day: 'Thu', dayJa: '木', open: '10:00', close: '20:00', closed: false },
-  { day: 'Fri', dayJa: '金', open: '10:00', close: '20:00', closed: false },
-  { day: 'Sat', dayJa: '土', open: '10:00', close: '19:00', closed: false },
-  { day: 'Sun', dayJa: '日', open: '10:00', close: '19:00', closed: false },
+  { day: "Mon", dayJa: "月", open: "", close: "", closed: true },
+  { day: "Tue", dayJa: "火", open: "", close: "", closed: true },
+  { day: "Wed", dayJa: "水", open: "10:00", close: "20:00", closed: false },
+  { day: "Thu", dayJa: "木", open: "10:00", close: "20:00", closed: false },
+  { day: "Fri", dayJa: "金", open: "10:00", close: "20:00", closed: false },
+  { day: "Sat", dayJa: "土", open: "10:00", close: "19:00", closed: false },
+  { day: "Sun", dayJa: "日", open: "10:00", close: "19:00", closed: false },
+] as const;
+
+export const PAYMENT_METHODS = [
+  { src: visaLogo, alt: "Visa" },
+  { src: mastercardLogo, alt: "Mastercard" },
+  { src: googlePayLogo, alt: "Google Pay" },
+  { src: payPalLogo, alt: "PayPal" },
+] as const;
+
+export const MAP_QUICK_ACTIONS = [
+  { src: mapPinIcon, label: "Google マップを開く", href: MAP_URL },
+  { src: phoneIcon, label: "電話をかける", href: `tel:${PHONE}` },
+  { src: mailIcon, label: "メールを送る", href: `mailto:${MAIL}` },
+] as const;
+
+export const CONTACT_INFO = [
+  {
+    label: "住所",
+    info: ADDRESS_JA,
+    cta: "OPEN MAP",
+    href: MAP_URL,
+    rel: "noopener noreferrer",
+    target: "_blank",
+  },
+  {
+    label: "TEL",
+    info: PHONE,
+    cta: "CALL NOW",
+    href: `tel:${PHONE}`,
+    rel: "",
+    target: "_self",
+  },
+  {
+    label: "MAIL",
+    info: MAIL,
+    cta: "SEND EMAIL",
+    href: `mailto:${MAIL}`,
+    rel: "",
+    target: "_self",
+  },
+] as const;
+
+export const LOCATION_INFO = [
+  { title: "アクセス", info: `${ADDRESS_JA}`, note: "原宿駅 竹下口 徒歩3分" },
+  { title: "駐車場", info: "", note: "２台完備 / ２Spaces" },
 ] as const;
