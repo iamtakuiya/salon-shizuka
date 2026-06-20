@@ -10,7 +10,7 @@ import clsx from 'clsx';
 
 type RowOwnProps<T extends ElementType> = {
   as?: T;
-  gap?: 'xs' | 'sm' | 'md' | 'lg';
+  gap?: 'xs' | 'sm' | 'md' | 'lg' | 'none';
   align?: 'start' | 'center' | 'end' | 'stretch';
   justify?: 'start' | 'center' | 'end' | 'between' | 'around';
   wrap?: boolean;

@@ -21,7 +21,40 @@ export default function Header() {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.ui.mobileMenuOpen);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
-  // const [isMobile, setIsMobile] = useState();
+  // const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isScrolling, setIsScrolling] = useState<boolean>(false);
+  const [isAtTop, setIsAtTop] = useState<boolean>(false);
+
+  useEffect(() => {
+    let scrollTimeout: ReturnType<typeof setTimeout>;
+    
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Check if the user is still at the top area
+      setIsAtTop(currentScrollY < 50);
+
+      // Mark as actively scrolling immediately
+      setIsScrolling(true);
+
+      // Clear previous timeout and set a new one
+      clearTimeout(scrollTimeout);
+
+      // When scrolling stops for 1.5s, mark siScrolling as false
+      scrollTimeout = setTimeout(() => {
+        setIsScrolling(false);
+      }, 1500)
+    };
+
+    // Run once on mount to capture initial position if page is reloaded mid-scroll
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, []);
 
   // Close on ESC key
   useEffect(() => {
@@ -40,9 +73,16 @@ export default function Header() {
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
+  const headerClass = `
+    ${styles.header} 
+    ${isScrolling ? styles['header--active'] : ''} 
+    ${!isAtTop && ! isScrolling ? styles['header--hidden'] : ''}
+  `; 
+ 
+
   return (
     <>
-      <header className={styles.header}>
+      <header className={headerClass}>
         <Container>
           <Row
             justify="between"
@@ -51,16 +91,16 @@ export default function Header() {
           >
             <LogoWrapper className={styles.header__logoWrapper}>
               <Link href="#home" aria-label="Salon Shizuka - ホームへ" className={styles.logoWrapper__link}>
-                <Logo className={styles.header__logo} width={85} height={32} />
+                <Logo className={`${styles.header__logo} ${isScrolling ? styles['header__logo--active'] : ""}`} width={85} height={32} />
               </Link>
             </LogoWrapper>
-            <DesktopNav />
-            <div className={styles.header__socialWrapper}>
+            <DesktopNav isScrolling={isScrolling} />
+            <div className={`${styles.header__socialWrapper} ${isScrolling ? styles['header__socialWrapper--active'] : ''}`}>
               <SocialLinks items={SOCIAL_LINKS} className={styles.header__social} />
             </div>
             <Button
               ref={hamburgerRef}
-              className={`${styles.header__hamburger} ${isOpen ? styles['header__hamburger--open'] : ''}`}
+              className={`${styles.header__hamburger} ${isOpen ? styles['header__hamburger--open'] : ''}  ${isScrolling ? styles['header__hamburger--active'] : ""}`}
               onClick={() => dispatch(toggleMobileMenu())}
               aria-expanded={isOpen}
               aria-controls="mobile-menu"

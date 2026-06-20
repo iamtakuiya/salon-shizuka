@@ -13,7 +13,7 @@ interface SocialLinksProps {
 
 export function SocialLinks({ items, className }: SocialLinksProps) {
   return (
-    <Row gap="sm" className={className}>
+    <Row gap="none" className={className}>
       {items.map(({ label, href, icon }) => (
         <Link
           key={label}

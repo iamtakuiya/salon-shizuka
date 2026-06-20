@@ -11,7 +11,7 @@ type ContainerProps<T extends ElementType = 'div'> = {
 
 export function Container<T extends ElementType = 'div'>({
   as,
-  size = 'lg',
+  size = 'xl',
   className,
   children,
   ...rest

@@ -1,9 +1,10 @@
-import React, {
-  forwardRef,
-  type ElementType,
-  type ComponentPropsWithoutRef,
-  type ComponentPropsWithRef,
-} from 'react';;
+import { 
+  forwardRef, 
+  ElementType, 
+  ComponentPropsWithoutRef, 
+  ComponentPropsWithRef, 
+  ReactNode 
+} from "react";
 import styles from './Surface.module.scss';
 import clsx from 'clsx';
 
@@ -19,35 +20,32 @@ export type SurfaceVariant =
 export type SurfacePadding = 'none' | 'sm' | 'md' | 'lg' | 'xl';
 export type SurfaceRadius  = 'none' | 'sm' | 'md' | 'lg' | 'full';
 
-type SurfaceOwnProps = {
-  variant?: SurfaceVariant;
-  padding?: SurfacePadding;
-  radius?: SurfaceRadius;
+// Define your base props without the 'as' and 'ref' props
+type SurfaceOwnProps<T extends ElementType> = {
+  as?: T;
+  variant?: string; // Add your actual variant types here
+  padding?: string;
+  radius?: string;
   className?: string;
+  children?: ReactNode;
 };
 
-type SurfaceProps<T extends ElementType> =
-  SurfaceOwnProps & {
-    as?: T;
-  } & Omit<ComponentPropsWithoutRef<T>, keyof SurfaceOwnProps | 'as'>;
+// Combine your custom props with the native HTML attributes of element T
+export type SurfaceProps<T extends ElementType> = SurfaceOwnProps<T> & 
+  Omit<ComponentPropsWithoutRef<T>, keyof SurfaceOwnProps<T>>;
 
-type SurfaceComponent = <T extends ElementType = 'div'>(
-  props: SurfaceProps<T> & {
-    ref?: ComponentPropsWithRef<T>['ref'];
-  }
-) => React.ReactElement | null;
 
 const SurfaceRender = <T extends ElementType = 'div'>(
 {
   as,
-  variant  = 'default',
+  variant  = '',
   padding  = 'none',
   radius   = 'none',
   className,
   children,
   ...rest
 }: SurfaceProps<T>,
-ref: ComponentPropsWithRef<T>['ref']
+ref: React.ForwardedRef<any>
 ) => {
   const Comp = as ?? 'div';
 
@@ -67,6 +65,13 @@ ref: ComponentPropsWithRef<T>['ref']
     </Comp>
   );
 }
+
+// Create a type wrapper that forces forwardRef to support generics
+type SurfaceComponent = <T extends ElementType = 'div'>(
+  props: SurfaceProps<T> & {
+    ref?: ComponentPropsWithRef<T>['ref'];
+  }
+) => React.ReactElement | null;
 
 export const Surface = forwardRef(SurfaceRender) as SurfaceComponent;
 

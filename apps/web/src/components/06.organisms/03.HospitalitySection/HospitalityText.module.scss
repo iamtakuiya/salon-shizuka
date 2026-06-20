@@ -14,48 +14,68 @@
   z-index: 1;
 }
 
-/* Mobile – rolling animation */
-@media (max-width: 767px) {
-  .hospitality__wrapper {
-    display: flex;
-    white-space: nowrap;
-    will-change: transform;
-  }
-}
-
-/* Tablet and up – static side‑by‑side layout */
-@media (min-width: 768px) {
-  .hospitality__wrapper {
-    display: flex;
-    gap: $space-8;
-    justify-content: center;
-  }
-}
-
-.hospitality__text {
-  font-family: $font-title;
-  font-size: clamp(1.5rem, 6vw, 2.5rem);
-  color: $color-text;
-  padding-right: 4rem; // space between repeats (used on mobile)
-}
-
 // Option 1
 .rotating {
-  overflow: hidden;
   height: 3rem;
+  overflow: hidden;
+}
 
+.rotating__textContainer {
+  display: flex;
+  flex-direction: column;
+
+  @include laptop {
+    width: 100%;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+}
+
+.rotating__phrase {
+  height: 3rem;
+  
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  font-family: $font-title;
+  font-size: clamp(0.75rem, 4vw, 0.95rem); 
+  line-height: 1.5; 
+  white-space: nowrap;
+  color: $color-text;
+  position: relative;
+
+  @include laptop {
+    flex-shrink: 0;
+
+    // This is crucial for desktop device, if not duplicating text is displayed
+    &:last-child {
+      display: none;
+    }
+
+    &:not(:last-child)::after {
+      position: absolute;
+      right: -6%;
+      top: 50%;
+      content: '';
+      width: 1px;
+      height: 60%;
+      background-color: $color-text;
+      transform: translateY(-50%);
+      opacity: 0.3;
+    }
+  }
 }
 
-.rotating__text {
-  text-align: center;
-
-  font-size: 1rem;
-  line-height: 1.5;
-
-  white-space: nowrap;
+.divider { 
+  width: 1px;
+  height: 100%;
+  background-color: $color-text;
+  margin-left: 0.5rem;
+  opacity: 0.3; 
 }
 
 // Option 2

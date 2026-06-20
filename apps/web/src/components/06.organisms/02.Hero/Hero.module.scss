@@ -2,16 +2,18 @@
 
 .hero {
   position: relative;
-  // height: 100svh;
   min-height: 640px;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: flex-end;
+  height: 100svh;
   overflow: hidden;
-  // background-position: center center;
-  // background-repeat: no-repeat;
-  // background-size: cover;
   padding: 0 8px;
+
+  @include tablet {
+    min-height: 700px;
+  }
+
+  @include desktop {
+    min-height: 1000px;
+  }
 }
 
 // // ─── Background ──────────────────────────────────────
@@ -19,6 +21,7 @@
   position: absolute;
   inset: 0;
   z-index: 0;
+  width: 100%;
 }
 
 .hero__bgImg {
@@ -27,6 +30,11 @@
   max-width: 575px;
   object-fit: cover;
   object-position: center top;
+
+
+  @media screen and (min-width: 540px) {
+    max-width: unset;
+  }
 }
 
 .hero__overlay {
@@ -41,8 +49,16 @@
 // // ─── Content ─────────────────────────────────────────
 .hero__container {
   position: relative;
-  top: 232px;
+  top: 40%;
   z-index: 1;
+
+  @include tablet {
+    top: 31%;
+  }
+
+  @include desktop {
+    top: 32%;
+  }
 }
 
 .header__logoWrapper {
@@ -51,20 +67,35 @@
 
 .hero__logo {
   fill: $color-bg;
+  width: 100%;
+  height: 100%;
+  min-width: 338px;
 
+  @include tablet {
+    min-width: 704px;
+  }
+
+  @include laptop {
+    min-width: 980px;
+  }
+
+  @include desktop {
+    min-width: 1050px;
+  }
 }
 
 .hero__content {
   padding-bottom: $space-16;
-  // max-width: 257px;
-  max-width: 560px;
   align-items: center;
   gap: 2rem;
 
+  @include tablet {
+    max-width: unset;
+  }
 
   @include laptop {
     padding-bottom: $space-24;
-    max-width: 640px;
+    // max-width: 640px;
   }
 }
 
@@ -83,15 +114,17 @@
   gap: $space-2;
   align-items: center;
   justify-content: center;
+
+  @include tablet {
+    max-width: unset;
+  }
 }
 
 .hero__headline {
   font-family: $font-title;
   font-size: clamp(2rem, 9vw, 2.5rem);
-  font-size: 32px;
   letter-spacing: 0.04em;
   font-weight: 700;
-  // line-height: 1.1;
   color: $color-bg;
 }
 
@@ -110,9 +143,19 @@
 // }
 
 .hero__sub {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  @include tablet {
+    flex-direction: row;
+  }
+}
+
+.hero__subheadline {
   font-family: $font-text;
   font-size: $fs-sm;
-  font-weight: regular;
+  font-weight: 400;
   line-height: 1.5;
   color: rgba($color-bg, 0.82);
   letter-spacing: 0.06em;
@@ -124,12 +167,19 @@
   flex-wrap: wrap;
   gap: $space-4;
   align-items: center;
+  justify-content: center;
   margin-top: $space-2;
+  width: 245px;
+
+  @include tablet {
+    width: 290px;
+  }
 }
 
 .hero__ctaBtn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   padding: $space-3 $space-8;
   font-family: $font-input;
   font-size: $fs-xs;
@@ -138,7 +188,7 @@
   background-color: $color-accent;
   color: $color-bg;
   border: 1px solid $color-accent;
-  border-radius: $radius-sm;
+  border-radius: $radius-full;
   transition: background-color $transition-base, border-color $transition-base;
 
   &:hover {
@@ -148,8 +198,10 @@
 }
 
 .hero__ctaBtnGhost {
+  width: 100%;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   padding: $space-3 $space-8;
   font-family: $font-input;
   font-size: $fs-xs;
@@ -158,7 +210,7 @@
   background-color: transparent;
   color: $color-bg;
   border: 1px solid rgba($color-bg, 0.5);
-  border-radius: $radius-sm;
+  border-radius: $radius-full;
   transition: background-color $transition-base, border-color $transition-base;
 
   &:hover {

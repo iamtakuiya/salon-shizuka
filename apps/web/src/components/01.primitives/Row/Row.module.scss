@@ -9,6 +9,8 @@
 .gap--sm { gap: var(--space-4); }
 .gap--md { gap: var(--space-6); }
 .gap--lg { gap: var(--space-8); }
+// .gap--none { gap: 0; }
+
 
 // ── Align (cross axis) ───────────────────────────────
 .align--start   { align-items: flex-start; }

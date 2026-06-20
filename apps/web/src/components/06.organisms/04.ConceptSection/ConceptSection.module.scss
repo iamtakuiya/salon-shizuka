@@ -2,8 +2,12 @@
 .concept {
   @include section-padding;
 
-  @media (min-width: 1024px) {
-    padding: 8rem 2rem;
+  @include tablet {
+    padding: 7rem 2rem;
+  }
+
+  @include laptop {
+    padding: 7rem 4rem;
   }
 }
 
@@ -13,9 +17,15 @@
   align-items: center;
   justify-content: center;
   gap: $space-4;
+  position: relative;
+  padding: 4rem 0.5rem;
 
   @include tablet {
-    
+    display: grid;
+    grid-template-columns: 30% 70%;
+
+    align-items: start;
+    padding-bottom: 10rem;
   }
 }
 
@@ -24,7 +34,13 @@
   order: 1;
   gap: 60px;
   padding-inline: 0.5rem;
-  text-align: center;
+  // text-align: center;
+
+  @include tablet {
+    grid-column: 1;
+    grid-row: 1;
+    padding-inline: 1.5rem 0;
+  }
 }
 
 .concept__label {
@@ -32,13 +48,18 @@
 
   @include tablet {
     display: inline-block;
-    @include font-text($fs-xs, 400); 
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 400;
     text-transform: uppercase;
   }
 }
 
-
 .concept__heading {
+  display: flex;
+  flex-direction: column;
+}
+
+.concept__headingText {
   font-family: $font-title;
   font-size: clamp($fs-2xl, 4vw, $fs-4xl);
   font-weight: 700;
@@ -46,7 +67,13 @@
   color: $color-text;
   letter-spacing: 0.04em;
   display: block;
+  text-align: center;
   white-space: nowrap;
+  
+  @include tablet {
+    text-align: start;
+    white-space: wrap;
+  }
 }
 
 
@@ -57,8 +84,11 @@
   width: 100%;
 
   @include tablet {
-      
-      z-index: 1;
+    grid-column: 2;
+    grid-row: 1;
+
+    position: relative;
+    z-index: 1;
   }
 
   &::after {
@@ -90,20 +120,27 @@
   order: 3;
   padding: $space-4;
   margin-inline: $space-4;
+  background: $color-bg-97; // Slight transparency optional
+  width: 100%;
 
 
-  @include tablet {    
+  // Visual adjustments for the card overlap effect
+  @include tablet {
     position: absolute;
-    bottom: 0;
-    left: 0;  
-    // Pull it forward over the image
+    left: 0%;  
+    bottom: 1rem;
+
+    width: min(65%, 475px);
     z-index: 2; 
     
-    // Visual adjustments for the card overlap effect
-    background: $color-bg-97; // Slight transparency optional
-    padding: 3rem;
+    padding: $space-6;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    }
+  }
+  
+  @include laptop {
+    padding: $space-12;
+    width: min(60%, 692px);
+  }
 
   p {
     font-family: $font-text;

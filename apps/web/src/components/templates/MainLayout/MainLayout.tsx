@@ -8,9 +8,13 @@ import OwnerSection from "@/components/06.organisms/07.OwnerSection/OwnerSection
 import { StyleGuideTeaser } from "@/components/06.organisms/08.StyleGuideTeaser/StyleGuideTeaser";
 import MenuSection from "@/components/06.organisms/09.MenuSection/MenuSection";
 import VoiceSection from "@/components/06.organisms/10.VoiceSection/VoiceSection";
-import NewsletterSection from "@/components/06.organisms/11.NewsletterSection/NewsletterSection";
+import NewsletterBanner from "@/components/06.organisms/11.NewsletterSection/NewsletterSection";
 import ReservationSection from "@/components/06.organisms/12.ReservationSection/ReservationSection";
 import SalonInfoSection from "@/components/06.organisms/13.SalonInfoSection";
+import Footer from "@/components/06.organisms/14.Footer/Footer";
+// import SalonInfoSection from "@/components/test/SalonInfoSection";
+// import RefactedReservationForm from "@/components/refactoring/Reservavation/ver1-refactored_ReservationForm/RefactedReservationForm";
+
 
 // Placeholder — assemble all section organisms here as you build them
 export const MainLayout = () => {
@@ -26,11 +30,10 @@ export const MainLayout = () => {
         <StyleGuideTeaser />
         <MenuSection />
         <VoiceSection />
-        <NewsletterSection />
+        <NewsletterBanner />
         <ReservationSection />
         <SalonInfoSection />
-        <br />
-        footer
+        <Footer />
       </main>
     </>
   );

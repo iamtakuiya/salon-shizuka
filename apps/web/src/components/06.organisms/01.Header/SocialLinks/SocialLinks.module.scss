@@ -3,9 +3,13 @@
   align-items: center;
   justify-content: center;
   padding: $space-2;
-  color: $color-text-muted;
+  color: $color-text;
   transition: color $transition-base;
   @include focus-ring;
+
+  @include laptop {
+    padding: $space-1;
+  }
 
   &:hover {
     color: $color-accent;

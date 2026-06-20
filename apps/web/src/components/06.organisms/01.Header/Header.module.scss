@@ -7,26 +7,86 @@
   z-index: $z-nav;
   height: 80px;
   background: transparent;
-  // background-color: rgba($color-bg, 0.95);
-  // backdrop-filter: blur(8px);
-  // border-bottom: 1px solid $color-border;
+  padding: 1rem 0.5rem;
+  isolation: isolate;
+  
+  // Explicitly defined border to prevent layout shifting
+  border-bottom: 1px solid transparent; 
+  backdrop-filter: blur(2px);
+
+  transition: 
+    transform 0.4s ease, 
+    backdrop-filter 0.4s ease, 
+    border-color 0.4s ease, 
+    background-color 0.4s ease, 
+    height 0.4s ease, 
+    padding 0.4s ease;
+  transform: translateY(0);
+  
+  @include tablet {
+    padding: 1rem 4rem;
+  }
+
+  @include laptop {
+    // padding: 1rem 5rem;
+  }
+}
+
+// Apply this styles when window scroll down, up to remove style.
+.header--active {
+  background-color: rgba($color-bg, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid $color-border;
+  height: 60px;
+  transform: translateY(0);
+  // padding-top: 0.85rem;
+  // padding-bottom: 0.85rem;
+}
+
+.header--hidden {
+  transform: translateY(-100%);
 }
 
 .header__navbar {
   height: 100%;
 }
 
-.header__socialWrapper {
-  display: none;
+.header__logoWrapper {
+  transform: translateY(5px);
+}
 
-  @include laptop {
-    display: flex !important;
+.header__logo {
+  fill: $color-bg;
+
+  &--active {
+    fill: $color-text;
   }
 }
 
-// .header__logoWrapper {}
+.header__socialWrapper {
+  display: none;
+  gap: 0;
 
-// .header__logo > * {}
+  @include laptop {
+    display: flex;
+  }
+
+  .header__social > * {
+    color: $color-bg; // Default color
+    transition: color 0.4s ease;
+  }
+
+  &--active {
+    .header__social > * {
+      color: $color-text;
+    }
+  }
+}
+
+.header__social {
+  // gap: 0 !important;
+}
+
 
 .header__hamburger {
   display: flex;
@@ -37,10 +97,17 @@
   height: 40px;
   padding: $space-2;
   cursor: pointer;
+
   @include focus-ring;
 
   @include laptop {
     display: none;
+  }
+
+  &--active {
+    .header__hamburgerBar {
+      background-color: $color-text; 
+    }
   }
 }
 
@@ -48,7 +115,7 @@
   display: block;
   width: 22px;
   height: 1.5px;
-  background-color: $color-text;
+  background-color: $color-bg;
   border-radius: 1px;
   transition: transform $transition-base, opacity $transition-base;
 }

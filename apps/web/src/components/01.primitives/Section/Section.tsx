@@ -1,25 +1,30 @@
 // src/components/primitives/Section/Section.tsx
-import type { ComponentPropsWithoutRef } from 'react';
+import type { ElementType, ComponentPropsWithoutRef } from 'react';
 import styles from './Section.module.scss';
 import clsx from 'clsx';
 
-type SectionProps = {
+// The props fully generic based on the element type passed to 'as'
+type SectionProps<T extends ElementType> = {
+  as?: T;
   spacing?: 'sm' | 'md' | 'lg';
   className?: string;
-} & ComponentPropsWithoutRef<'section'>;
+} & Omit<ComponentPropsWithoutRef<T>, 'as' | 'spacing' | 'className' >;
 
-export function Section({
+export function Section<T extends ElementType = 'section'>({
+  as,
   spacing = 'lg',
   className,
   children,
   ...rest
-}: SectionProps) {
+}: SectionProps<T>) {
+  const Comp = (as ?? 'section') as ElementType;
+
   return (
-    <section
+    <Comp
       className={clsx(styles.section, styles[`spacing--${spacing}`], className)}
       {...rest}
     >
       {children}
-    </section>
+    </Comp>
   );
 }

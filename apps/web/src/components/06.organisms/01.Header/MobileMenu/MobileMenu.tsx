@@ -1,4 +1,4 @@
-import { useEffect, useRef, PropsWithChildren } from "react";
+import { useEffect, useRef, PropsWithChildren, MouseEvent } from "react";
 import { gsap } from "gsap";
 
 import { menuOverlayIn, menuOverlayOut } from '@/animations/gsap/mobileMenu';
@@ -56,6 +56,21 @@ export default function MobileMenu({
 
   }, [isOpen]);
 
+  // Close MobileMenu with ESC
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+
+      window.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [isOpen, onClose])
+
   // Safely capture elements for GSAP animation
   const setNavItemRef = (el: HTMLLIElement | null, index: number) => {
     if (el) {
@@ -63,6 +78,14 @@ export default function MobileMenu({
     }
   };
 
+  // Check if the element clicked is exactly the backdrop box background
+  const handleOverlayClick = (e: MouseEvent<HTMLDivElement>) => {
+    if (e.target === mobileMenu.current) {
+      console.log(e.target)
+      onClose();
+    }
+  };
+  
   return (
     <Box
       ref={overlayRef}
@@ -77,12 +100,18 @@ export default function MobileMenu({
       <nav
         className={styles.menu__navbar} 
         aria-label="Mobile navigation"
+        onClick={(e) => e.stopPropagation()}
       >
-        <Row as="ul" className={styles.menu__list}>
+        <Row 
+          as="ul" 
+          className={styles.menu__list}
+          onClick={onClose}
+        >
           <NavLinks 
             itemClassName={styles.menu__item}
             linkClassName={styles.menu__link}
             itemRef={setNavItemRef}
+            onClick={onClose}
           />
           {children}
         </Row>

@@ -19,8 +19,12 @@
   @include font-text($fs-xs, 400);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: $color-text-muted;
+  color: $color-bg;
   transition: color $transition-base;
+
+  &--active {
+    color: $color-text; // color when window is scrolling
+  }
 
   &:hover {
     color: $color-accent;

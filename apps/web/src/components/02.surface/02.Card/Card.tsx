@@ -24,10 +24,10 @@ type CardOwnProps = {
   children?: React.ReactNode;
 };
 
-type CardProps<T extends ElementType> =
-  CardOwnProps & {
-    as?: T;
-  } & Omit<ComponentPropsWithoutRef<T>, keyof CardOwnProps | 'as'>;
+// type CardProps<T extends ElementType> =
+//   CardOwnProps & {
+//     as?: T;
+//   } & Omit<ComponentPropsWithoutRef<T>, keyof CardOwnProps | 'as'>;
 
 // Polymorphic component type
 // type CardComponent = <T extends ElementType = 'div'>(
@@ -44,13 +44,14 @@ export const Card = forwardRef<HTMLDivElement, CardOwnProps>((
       padding = 'md',
       className,
       children,
+      ...rest
     },
     ref
   ) => {
     return (
       <Surface
         ref={ref}
-        variant="elevated"
+        variant=""
         padding={padding}
         radius="md"
         className={clsx(
@@ -58,6 +59,7 @@ export const Card = forwardRef<HTMLDivElement, CardOwnProps>((
           styles[`card--${variant}`],
           className
         )}
+        {...rest}
       >
         {children}
       </Surface>

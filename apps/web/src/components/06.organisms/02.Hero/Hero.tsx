@@ -13,6 +13,8 @@ import { Button } from "@/components/04.atoms/Button/Button";
 
 import styles from "./Hero.module.scss";
 import heroMobileImg from "@assets/images/01.hero/hero-mobile.png";
+import heroTabletImg from "@assets/images/01.hero/hero-tablet.png";
+import heroDesktopImg from "@assets/images/01.hero/hero.png";
 
 export default function Hero() {
   const logoRef     = useRef<HTMLSpanElement>(null);
@@ -49,8 +51,17 @@ export default function Hero() {
       <Box className={styles.hero__bg}>
         <picture>
           <source 
-            media="(min-width: 768px)"
-            // srcSet={heroDesktopImg}
+            media="(min-width: 1440px)"
+            srcSet={heroDesktopImg}
+          />
+          <source 
+            media="(min-width: 540px)"
+            srcSet={heroTabletImg}
+          />
+
+          <source 
+            media="(min-width: 375px)"
+            srcSet={heroMobileImg}
           />
 
           <img
@@ -81,15 +92,19 @@ export default function Hero() {
           >
             {/* Logo */}
             <LogoWrapper ref={logoRef} className={styles.header__logoWrapper}>
-              <Logo className={styles.hero__logo} width={338} height={128} />
+              <Logo className={styles.hero__logo} />
             </LogoWrapper>
             
             <p
               ref={subRef}
               className={styles.hero__sub}
             >
-              あなた本来の美しさと艶を呼び覚ます、<br />
-              プライベートサロンで特別なひとときを。
+              <span className={styles.hero__subheadline}>
+                あなた本来の美しさと艶を呼び覚ます、
+              </span>
+              <span className={styles.hero__subheadline}>
+                プライベートサロンで特別なひとときを。
+              </span>
             </p>
             <h1
               ref={headlineRef}
