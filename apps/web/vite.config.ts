@@ -31,8 +31,8 @@ export default defineConfig({
         additionalData: `
           @use "@/styles/abstracts/variables" as *; 
           @use "@/styles/abstracts/mixins" as *;
-        `, 
-        // this is cause error
+          @use "sass:color" as color;
+        `,
       },
     },
   },
