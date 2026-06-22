@@ -30,6 +30,7 @@ import {
 } from 'react';
 
 import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 import { useSlider } from '@/animations/hooks/useSlider';
 
@@ -49,6 +50,7 @@ import { STYLES } from './data/hairstyleItem.d';
 // ── Component ───────────────────────────────────────────────────────────────
 
 export function StyleGuideTeaser() {
+
   const {
     current,
     next,
@@ -62,7 +64,7 @@ export function StyleGuideTeaser() {
 
   const trackRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  useGSAP(() => {
     const track = trackRef.current;
 
     if (!track) return;
@@ -77,21 +79,51 @@ export function StyleGuideTeaser() {
 
     if (!activeItem) return;
 
-    gsap.to(items, {
-      width: 150,
-      // height: 180,
-      opacity: 0.6,
-      duration: 0.8,
-      ease: 'power3.out',
+    const mm = gsap.matchMedia(trackRef);
+
+    // Mobile & Small Screen Rules (< 768px)
+    mm.add("(max-width: 767px)", () => {
+
+      gsap.to(items, {
+        width: 150,
+        // height: 180,
+        opacity: 0.6,
+        duration: 0.8,
+        ease: 'power3.out',
+      });
+  
+      gsap.to(activeItem, {
+        width: 220,
+        // height: 260,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power3.out',
+      });
+
+    })
+
+    // Tablet & Desktop Rules (>= 768px)
+    mm.add("(min-width: 768px)", () => {
+      gsap.to(items, {
+        width: 280,
+        // height: 330,
+        opacity: 0.6,
+        duration: 0.8,
+        ease: 'power3.out',
+      });
+
+      gsap.to(activeItem, {
+        width: 361,   // Applied from your max-width target
+        // height: 426,  // Applied from your max-height target
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power3.out',
+      });
     });
 
-    gsap.to(activeItem, {
-      width: 220,
-      // height: 260,
-      opacity: 1,
-      duration: 0.8,
-      ease: 'power3.out',
-    });
+    // Shared Centering Logic (Runs on all screen sizes)
+    // const parentWidth = track.parentElement?.clientWidth ?? 0;
+    // const offset = activeItem.offsetLeft - parentWidth / 2 + activeItem.clientWidth / 1.67;
 
     // Centering Logic
     // const offset =
@@ -109,11 +141,13 @@ export function StyleGuideTeaser() {
       duration: 0.8,
       ease: 'power3.out',
     });
-  }, [current]);
+
+      // mm.revert() is automatically called by useGSAP when dependencies change
+  }, {dependencies: [current], scope: trackRef });
 
   return (
     <Section
-      id="gallery"
+      id="style"
       spacing="lg"
       className={styles.gallery}
     >

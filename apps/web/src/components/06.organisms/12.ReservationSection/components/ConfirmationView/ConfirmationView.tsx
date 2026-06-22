@@ -69,7 +69,8 @@ export function ConfirmationView({
           className={styles.btnGhost}
           onClick={onBack}
         >
-          ← 修正する
+          {/* ←  */}
+          修正する
         </button>
         <button
           type="button"

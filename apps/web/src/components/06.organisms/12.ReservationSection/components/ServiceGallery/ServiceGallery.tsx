@@ -17,6 +17,7 @@ export default function ServiceGallery({
   const [isGrid, setIsGrid] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
 
+  // Adjust page viewport if the active item changes externally
   useEffect(() => {
     const idx = MENU_CATEGORIES.findIndex((c) => c.id === activeCategoryId);
     if (idx < 0) return;
@@ -50,18 +51,54 @@ export default function ServiceGallery({
   const visibleCats = isGrid
     ? MENU_CATEGORIES.slice(visibleStart, visibleStart + DESKTOP_GRID_CAPACITY)
     : MENU_CATEGORIES;
-  const slideOffset = isGrid ? 0 : page * (100 / perPage);
+  
+    // Track translation using container percentage chunks
+  // const slideOffset = isGrid ? 0 : page * (100 / perPage);
+  
+  const firstVisibleIndex = page * perPage;
+
+  // NEW: Setup only horizontal scrolling not page up and down
+  const viewportRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // We only run this custom scroll logic when we are in mobile/tablet sliding mode
+    if (isGrid) return; 
+
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!viewport || !track) return;
+
+    // Find all cards inside the track
+    const cards = track.querySelectorAll(`.${styles.gallery__card}`);
+    const targetCard = cards[firstVisibleIndex] as HTMLElement;
+
+    if (targetCard) {
+      const viewportWidth = viewport.getBoundingClientRect().width;
+      const cardWidth = targetCard.getBoundingClientRect().width;
+
+      // Calculate the target card's left position relative to the track parent container
+      // Exact center math: Card's offset positioning minus half of the empty structural viewport remaining space
+      const targetOffsetLeft = targetCard.offsetLeft - (viewportWidth - cardWidth) / 2;
+
+      // Scroll ONLY the viewport container horizontally
+      viewport.scrollTo({
+        left: targetOffsetLeft,
+        behavior: 'smooth',
+      });
+    }
+  }, [firstVisibleIndex, isGrid]);
+
 
   const goPrev = () => setPage((p) => (p === 0 ? totalPages - 1 : p - 1));
   const goNext = () => setPage((p) => (p === totalPages - 1 ? 0 : p + 1));
 
   return (
     <div className={styles.gallery}>
-      <div className={styles.gallery__viewport}>
+      <div ref={viewportRef} className={styles.gallery__viewport}>
         <div
           ref={trackRef}
           className={[styles.gallery__track, isGrid ? styles['gallery__track--grid'] : ''].join(' ')}
-          style={!isGrid ? { transform: `translateX(-${slideOffset}%)` } : undefined}
+          // style={!isGrid ? { transform: `translateX(-${slideOffset}%)` } : undefined}
         >
           {(isGrid ? visibleCats : MENU_CATEGORIES).map((cat) => {
             const active = cat.id === activeCategoryId;
@@ -74,7 +111,7 @@ export default function ServiceGallery({
                   styles.gallery__card,
                   active ? styles['gallery__card--active'] : '',
                 ].join(' ')}
-                style={!isGrid ? { flex: `0 0 ${100 / perPage}%` } : undefined}
+                // style={!isGrid ? { flex: `0 0 ${100 / perPage}%` } : undefined}
                 onClick={() => onCategorySelect(cat.id)}
               >
                 {cat.img ? (

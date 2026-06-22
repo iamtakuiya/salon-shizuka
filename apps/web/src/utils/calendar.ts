@@ -7,8 +7,19 @@ export function buildCalendarCells(year: number, month: number): (number | null)
   return cells;
 }
 
-export function isClosedDay(year: number, month: number, day: number) {
-  return new Date(year, month, day).getDay() === 3; // Wednesdays closed
+export function isClosedDay(year: number, month: number, day: number): boolean {
+  const date = new Date(year, month, day);
+  const dayOfWeek = date.getDay();
+
+  // Check if it's any Monday (Monday is 1)
+  const isMonday = dayOfWeek === 1;
+
+  // Check if it's the 2nd Tuesday
+  // Tuesday is 2. The 2nd Tuesday of any month must fall between the 8th and 14th.
+  const isSecondTuesday = dayOfWeek === 2 && day >= 8 && day <= 14;
+
+  // Return true if it's either a Monday OR the 2nd Tuesday
+  return isMonday || isSecondTuesday;
 }
 
 export function isPastDay(year: number, month: number, day: number) {

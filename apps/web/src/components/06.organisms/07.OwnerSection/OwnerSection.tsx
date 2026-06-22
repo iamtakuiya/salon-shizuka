@@ -1,16 +1,3 @@
-/*
-TODO: Do this when finishing styling
-To achieve your goal of eliminating hard-coded values and introducing polymorphism and generics, 
-I have structured this into a flexible Notification System pattern.
-
-
-Class name
-- owner
-
-
-*/
-
-import { useRef } from "react";
 import { useScrollReveal } from '@/animations/hooks/useScrollReveal';
 import styles from './OwnerSection.module.scss';
 import { Section } from "@/components/01.primitives/Section/Section";
@@ -18,7 +5,9 @@ import { Container } from "@/components/01.primitives/Container/Container";
 import { Stack } from "@/components/01.primitives/Stack/Stack";
 import { Box } from "@/components/01.primitives/Box/Box";
 
-import ownerImg from '@/assets/images/04.owner/owner-m.png';
+import ownerMobileImg from '@/assets/images/04.owner/owner-mobile.png';
+import ownerTabletImg from '@/assets/images/04.owner/owner-tablet.png';
+import ownerDesktopImg from '@/assets/images/04.owner/owner-desk.png';
 import { Card } from "@/components/02.surface/02.Card/Card";
 
 export default function OwnerSection() {
@@ -30,80 +19,75 @@ export default function OwnerSection() {
 
   return (
     <Section
-      id="concept"
-      className={styles.concept}
+      id="owner"
+      className={styles.owner}
       spacing="lg"
-      aria-label="Concept"
+      aria-label="owner"
     >
-      <Container>
-        <div
-          className={styles.concept__grid}
+      <Container className={styles.owner__grid}>
+        <Stack 
+          className={styles.owner__headline}
+        >
+          {/* Tagline */}
+          <span
+            ref={labelRef}
+            className={styles.owner__label}
+          >
+            Owner shizuka 
+          </span>
+          {/* Headline */}
+          <h2
+            ref={headingRef}
+            className={styles.owner__heading}
+          >
+            <span className={styles.owner__headingText}>
+              髪のお悩み,
+            </span>
+            <span className={styles.owner__headingText}>
+              ここではゆっくり
+            </span>
+            <span className={styles.owner__headingText}>
+              話してくださいね
+            </span>
+          </h2>
+        </Stack>
+
+        {/* Image */}
+        <Box
+          ref={imgRef}
+          className={styles.owner__imageWrapper}
         >
 
-          <Stack 
-            className={styles.concept__headline}
-          >
-            {/* Tagline */}
-            <span
-              ref={labelRef}
-              className={styles.concept__label}
-            >
-              Owner shizuka 
-            </span>
-            {/* Headline */}
-            <h2
-              ref={headingRef}
-              className={styles.concept__heading}
-            >
-              <p>
-                髪のお悩み,
-              </p>
-              <p>
-                ここではゆっくり
-              </p>
-              <p>
-                話してくださいね
-              </p>
-            </h2>
-          </Stack>
+          <picture>
+            <source 
+              media="(min-width: 1024px)"
+              srcSet={ownerDesktopImg}
+            />
+            <source 
+              media="(min-width: 768px)"
+              srcSet={ownerTabletImg}
+            />
 
-          {/* Image */}
-          <Box
-            ref={imgRef}
-            className={styles.concept__imageWrapper}
-          >
+            <img
+              src={ownerMobileImg}
+              alt="オーナー 静花の写真"
+              className={styles.owner__image}
+              loading="lazy"
+            />
+          </picture>
+        </Box>
 
-            <picture>
-              <source 
-                media="(min-width: 768px)"
-                // srcSet={heroDesktopImg}
-              />
-
-              <img
-                src={ownerImg}
-                alt="オーナー 静花の写真"
-                className={styles.concept__image}
-                loading="lazy"
-              />
-            </picture>
-          </Box>
-
-          <Card 
-            ref={cardRef}
-            className={styles.concept__card}
-            padding="none"
-          >
-            {/* TODO: Text Stagger animation */}
-            <p ref={textRef}>お客様とお話ししていて、いつも思うことがあります。皆様それぞれ違う悩みを持っていて、その場しのぎではない「根本的な改善」で、ずっと自分の髪を好きでいてほしいな、と。</p>
-            <p ref={textRef}>Salon Shizukaを完全予約制のプライベート空間にしたのは、まわりの目を気にせず、ホッと一息ついてほしかったからです。他店だとちょっと緊張して言いにくいようなお悩みも、ここでは肩の力を抜いて何でもお話ししてください。</p>
-            <p ref={textRef}>丁寧なヘアケアとお家でのちょっとしたコツを一緒におさらいしながら、柔らかいツヤやふんわりとした健やかさなど、あなた本来の美しさを引き出していきます！</p>
-          </Card>
-
-        </div>
+        <Card 
+          ref={cardRef}
+          className={styles.owner__card}
+          padding="none"
+        >
+          {/* Body Text */}
+          <p ref={textRef}>お客様とお話ししていて、いつも思うことがあります。皆様それぞれ違う悩みを持っていて、その場しのぎではない「根本的な改善」で、ずっと自分の髪を好きでいてほしいな、と。</p>
+          <p ref={textRef}>Salon Shizukaを完全予約制のプライベート空間にしたのは、まわりの目を気にせず、ホッと一息ついてほしかったからです。他店だとちょっと緊張して言いにくいようなお悩みも、ここでは肩の力を抜いて何でもお話ししてください。</p>
+          <p ref={textRef}>丁寧なヘアケアとお家でのちょっとしたコツを一緒におさらいしながら、柔らかいツヤやふんわりとした健やかさなど、あなた本来の美しさを引き出していきます！</p>
+        </Card>
       </Container>
-
-      {/* Body Text */}
-
     </Section>
   );
 };

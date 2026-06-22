@@ -43,7 +43,7 @@ export default function Hero() {
 
   return (
     <Section
-      id="hero"
+      id="home"
       className={styles.hero}
       aria-label="Salon Shizuka Introduction"
       // style={{ backgroundImage: `url(${heroMobileImg})`}}

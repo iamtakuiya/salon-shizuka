@@ -16,7 +16,7 @@ export const FOOTER_NAV_LINK: FooterNavLinkProp[] = [
   { href: "#recruit", text: "Recruit", isExistPage: false },
 ];
 
-export const COPYRIGHT = "© 2024 Fashion Brand. All rights reserved.";
+export const COPYRIGHT = "© 20XX SALON SHIZUKA. All rights reserved.";
 
 export default function Footer() {
   return (

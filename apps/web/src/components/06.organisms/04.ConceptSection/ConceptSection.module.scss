@@ -18,11 +18,11 @@
   justify-content: center;
   gap: $space-4;
   position: relative;
-  padding: 4rem 0.5rem;
+  padding: 4rem 0;
 
   @include tablet {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 32% 68%;
 
     align-items: start;
     padding-bottom: 10rem;
@@ -48,7 +48,7 @@
 
   @include tablet {
     display: inline-block;
-    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-size: clamp(1.5rem, 2vw, 2rem);
     font-weight: 400;
     text-transform: uppercase;
   }
@@ -121,7 +121,7 @@
   padding: $space-4;
   margin-inline: $space-4;
   background: $color-bg-97; // Slight transparency optional
-  width: 100%;
+  width: 97%;
 
 
   // Visual adjustments for the card overlap effect

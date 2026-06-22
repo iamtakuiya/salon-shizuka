@@ -169,7 +169,7 @@ export default function ReservationSection() {
   // ── Render ──
   return (
     <Section id="reservation" spacing="lg" aria-label="Reservation">
-      <Container size="md">
+      <Container size="xl" className={styles.reservation__container}>
         <Stack gap="xl">
 
           {/* Section header */}

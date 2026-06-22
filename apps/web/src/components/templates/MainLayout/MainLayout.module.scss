@@ -2,5 +2,7 @@
 
 // Offset for fixed 80px header
 .main {
-  overflow: hidden;
+  overflow-x: clip;
+  // overflow-x: hidden;
+  overflow-y: visible;
 }

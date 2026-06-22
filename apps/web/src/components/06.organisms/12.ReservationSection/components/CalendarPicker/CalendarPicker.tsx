@@ -74,7 +74,7 @@ export function CalendarPicker({
         })}
       </div>
 
-      <p className={styles.calendar__note}>水曜定休</p>
+      <p className={styles.calendar__note}>毎週　月曜日・第2火曜日</p>
     </div>
   );
 }

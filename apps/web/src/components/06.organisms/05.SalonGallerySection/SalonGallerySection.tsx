@@ -20,6 +20,7 @@ import {
 } from 'react';
 
 import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 import { useSlider } from '@/animations/hooks/useSlider';
 
@@ -34,11 +35,14 @@ import { SliderGrid } from '@/components/05.molecules/SliderGrid/SliderGrid';
 
 import styles from './SalonGallerySection.module.scss';
 
-import { ITEMS } from './data/galleryItem.d';
+// Constants
+import { GALLERY_SECTION_ID, GALLERY_HEADING, GALLERY_SUBHEADING } from '@/features/gallery/constants/gallery.constants';
+import { GALLERY_ITEMS } from '@/features/gallery/data/gallery.data';
 
 // ── Component ───────────────────────────────────────────────────────────────
 
-export function SalonGallerySection() {
+export function SalonGallerySection() {;
+
   const {
     current,
     next,
@@ -46,13 +50,13 @@ export function SalonGallerySection() {
     goTo,
     // totalSteps,
   } = useSlider({
-    totalItems: ITEMS.length,
+    totalItems: GALLERY_ITEMS.length,
     visibleItems: 3,
   });
 
   const trackRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  useGSAP(() => {
     const track = trackRef.current;
 
     if (!track) return;
@@ -67,27 +71,57 @@ export function SalonGallerySection() {
 
     if (!activeItem) return;
 
-    gsap.to(items, {
-      width: 150,
-      height: 180,
-      opacity: 0.6,
-      duration: 0.8,
-      ease: 'power3.out',
+    const mm = gsap.matchMedia(trackRef);
+
+    // Mobile & Small Screen Rules (< 768px)
+    mm.add("(max-width: 767px)", () => {
+
+      gsap.to(items, {
+        width: 150,
+        height: 180,
+        opacity: 0.6,
+        duration: 0.8,
+        ease: 'power3.out',
+      });
+  
+      gsap.to(activeItem, {
+        width: 220,
+        height: 260,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power3.out',
+      });
+
+    })
+
+    // Tablet & Desktop Rules (>= 768px)
+    mm.add("(min-width: 768px)", () => {
+      gsap.to(items, {
+        width: 250,
+        height: 330,
+        opacity: 0.6,
+        duration: 0.8,
+        ease: 'power3.out',
+      });
+
+      gsap.to(activeItem, {
+        width: 361,   // Applied from your max-width target
+        height: 426,  // Applied from your max-height target
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power3.out',
+      });
     });
 
-    gsap.to(activeItem, {
-      width: 220,
-      height: 260,
-      opacity: 1,
-      duration: 0.8,
-      ease: 'power3.out',
-    });
+    // Shared Centering Logic (Runs on all screen sizes)
+    const parentWidth = track.parentElement?.clientWidth ?? 0;
+    const offset = activeItem.offsetLeft - parentWidth / 2 + activeItem.clientWidth / 1.67;
 
     // Centering Logic
-    const offset =
-      activeItem.offsetLeft -
-      track.parentElement!.clientWidth / 2 +
-      activeItem.clientWidth / 1.67;
+    // const offset =
+    //   activeItem.offsetLeft -
+    //   track.parentElement!.clientWidth / 2 +
+    //   activeItem.clientWidth / 1.67;
 
     // const ITEM_WIDTH = 166;  // OPTION 1
     // const target = items[current]?.offsetLeft ?? 0;  // OPTION 2
@@ -99,22 +133,24 @@ export function SalonGallerySection() {
       duration: 0.8,
       ease: 'power3.out',
     });
-  }, [current]);
+
+      // mm.revert() is automatically called by useGSAP when dependencies change
+  }, {dependencies: [current], scope: trackRef });
 
   return (
     <Section
-      id="gallery"
+      id={GALLERY_SECTION_ID}
       spacing="lg"
       className={styles.gallery}
     >
       <Container as="header" className={styles.gallery__header}>
         <Stack gap="xs">
           <span className={styles.gallery__label}>
-            完全予約制・プライベートサロン SHIZUKA
+            {GALLERY_SUBHEADING}
           </span>
 
           <h2 className={styles.gallery__heading}>
-            Salon Gallery
+            {GALLERY_HEADING}
           </h2>
         </Stack>
 
@@ -140,7 +176,7 @@ export function SalonGallerySection() {
       <ImageSlider>
         <SliderGrid
           ref={trackRef}
-          items={ITEMS}
+          items={GALLERY_ITEMS}
           currentIndex={current}
           variant="gallery"
           onSelect={goTo}
@@ -148,7 +184,7 @@ export function SalonGallerySection() {
       </ImageSlider>
 
       <Box className={styles.gallery__pagination}>
-        {ITEMS.map((_, index) => (
+        {GALLERY_ITEMS.map((_, index) => (
           <button
             key={index}
             onClick={() => goTo(index)}

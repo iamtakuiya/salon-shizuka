@@ -13,5 +13,9 @@
   line-height: 1.8;
   letter-spacing: 0.04em;
   color: $color-text-muted;
-  text-align: right;
+  text-align: center;
+  
+  @include tablet {    
+    text-align: right;
+  }
 }

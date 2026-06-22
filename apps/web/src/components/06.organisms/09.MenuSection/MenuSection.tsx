@@ -34,7 +34,7 @@ export default function MenuSection() {
       aria-label="Menu &amp; Pricing"
       className={styles.menu}
     >
-      <Container>
+      <Container className={styles.menu__container}>
         <Stack gap="xl">
 
           <MenuHeader />

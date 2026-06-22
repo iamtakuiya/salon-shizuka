@@ -6,6 +6,18 @@
   background-color: $color-bg; // Fix: was commented out
 }
 
+.menu__container {
+  padding: 1rem 0.5rem;
+
+  @include tablet {
+    padding: 7rem 2rem;
+  }
+
+  @include laptop {
+    padding: 7rem 4rem;
+  }
+}
+
 // ─── Two-column layout ───────────────────────────────
 .menu__columns {
   display: flex;

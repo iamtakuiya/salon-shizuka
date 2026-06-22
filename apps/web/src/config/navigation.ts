@@ -8,11 +8,11 @@ export const NAV_LINKS: readonly NavLinkItem[] = [
   { label: 'Home',        href: '#home'        },
   { label: 'Concept',     href: '#concept'     },
   { label: 'Gallery',     href: '#gallery'     },
-  { label: 'Style', href: '#style-guide' },
+  { label: 'Style',       href: '#style'       },
   { label: 'Menu',        href: '#menu'        },
   { label: 'Voice',       href: '#voice'       },
   { label: 'Reservation', href: '#reservation' },
-  { label: 'Salon Info', href: '#salonInfo'         },
+  { label: 'Salon Info',  href: '#info'        },
 ] as const;
 
 // Define the specific literal type

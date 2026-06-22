@@ -1,5 +1,19 @@
 // No @use — abstracts injected via vite.config.ts additionalData
 
+.reservation {}
+
+.reservation__container {
+  padding: 1rem 1.25rem;
+
+  @include tablet {
+    padding: 7rem 2rem;
+  }
+
+  @include laptop {
+    padding: 7rem 4rem;
+  }
+}
+
 // ─── Section heading ─────────────────────────────────────────────────────────
 
 .heading {
@@ -18,7 +32,7 @@
   font-size: $fs-xxs;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: $color-text-muted;
+  color: $color-text;
   margin-bottom: $space-4;
 }
 
@@ -66,8 +80,8 @@
     flex-direction: column;
     width: 320px;
     flex-shrink: 0;
-    position: sticky;
-    top: calc(80px + $space-8); // header height + breathing room
+    position: sticky !important;
+    top: calc(80px + $space-1); // header height + breathing room
     align-self: flex-start;
   }
 }
@@ -110,6 +124,10 @@
   border: 1px solid $color-border;
   border-radius: $radius-md;
   padding: $space-6;
+
+  @media screen and (max-width: 374px) {
+    padding: $space-2;
+  }
 }
 
 .calendar__nav {
@@ -161,6 +179,10 @@
   place-items: center;
   gap: 2px;
 
+  @media screen and (max-width: 374px) {
+    gap: 0;
+  }
+
   @include laptop {
     place-items: unset;
   }
@@ -170,7 +192,7 @@
   font-family: $font-input;
   font-size: $fs-xxs;
   letter-spacing: 0.05em;
-  color: $color-text-muted;
+  color: $color-text;
   text-align: center;
   padding: $space-2 0 $space-3;
 }
@@ -192,6 +214,11 @@
   cursor: pointer;
   transition: border-color $transition-fast, background $transition-fast, color $transition-fast;
 
+  @media screen and (max-width: 374px) {
+    width: 24px;
+    height: 24px;
+  }
+
   @include laptop {
     width: unset;
     height: unset;
@@ -199,7 +226,7 @@
   }
 
 
-  &:hover:not(&--disabled) {
+  &:is(:not(.calendar__day--disabled, .calendar__day--selected)):hover {
     border-color: $color-accent;
     color: $color-accent;
   }
@@ -212,7 +239,7 @@
   &--selected {
     background: $color-accent;
     border-color: $color-accent;
-    color: $color-white !important;
+    color: $color-bg !important;
   }
 }
 
@@ -220,7 +247,7 @@
   font-family: $font-input;
   font-size: $fs-xxs;
   letter-spacing: 0.06em;
-  color: $color-text-muted;
+  color: $color-text;
   text-align: right;
 }
 
@@ -245,7 +272,7 @@
   cursor: pointer;
   transition: border-color $transition-fast, background $transition-fast, color $transition-fast;
 
-  &:hover {
+  &:not(.timeSlots__slot--selected):hover {
     border-color: $color-accent;
     color: $color-accent;
   }
@@ -253,7 +280,7 @@
   &--selected {
     background: $color-accent;
     border-color: $color-accent;
-    color: $color-white;
+    color: $color-bg;
   }
 
   &:focus-visible {
@@ -278,8 +305,16 @@
 }
 
 .gallery__viewport {
-  overflow: hidden;
   width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 // Slider track — default flex strip for mobile / tablet
@@ -287,6 +322,9 @@
   display: flex;
   gap: $space-4;
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+
+  justify-content: flex-start;
 
   // Desktop 2×3 grid override
   &--grid {
@@ -294,12 +332,12 @@
     grid-template-columns: repeat(2, 1fr);
     gap: $space-3;
     transform: none !important;
+    width: auto;
   }
 }
 
 // Individual category card
 .gallery__card {
-  // Mobile: full-width (flex-basis set inline by JS)
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -310,6 +348,22 @@
   cursor: pointer;
   text-align: left;
   flex-shrink: 0;
+  
+  // THIS: Forces each slide card to lock exactly to the center ───
+  scroll-snap-align: center;
+  
+  // Mobile: Account for gap by subtracting from total track viewport width
+  width: 100%;
+
+  @include tablet {
+    // 2 cards per view: split width cleanly down the middle minus half of the track gap
+    width: calc(50% - (#{$space-4} / 2));
+  }
+
+  @include laptop {
+    width: 100%; // Reset structural width to auto fill inside the display grid 
+    scroll-snap-align: unset;
+  }
 
   &:focus-visible {
     outline: 2px solid $color-accent;
@@ -330,7 +384,7 @@
 
   .gallery__card--active & {
     border-color: $color-accent;
-    transform: scale(1.02);
+    transform: scale(0.98);
   }
 }
 
@@ -352,14 +406,25 @@
   font-size: $fs-xxs;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: $color-text-muted;
+  color: $color-text;
+  padding-inline: 0.75rem;
+  
+  @include tablet {
+    padding-inline: 0.4rem;
+  }
 }
 
 .gallery__cardName {
   font-family: $font-text;
-  font-size: $fs-sm;
+  font-size: $fs-xs;
   letter-spacing: 0.06em;
   color: $color-text;
+  padding-inline: 0.75rem;
+  margin-top: -0.5rem;
+
+  @include tablet {
+    padding-inline: 0.4rem;
+  }
 }
 
 // Slider controls
@@ -367,7 +432,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: $space-2 0;
+  padding: $space-2 $space-2 $space-2 $space-4;
 }
 
 .gallery__dots {
@@ -387,7 +452,7 @@
   transition: background $transition-base, transform $transition-base;
 
   &:hover {
-    background: $color-text-muted;
+    background: $color-text;
   }
 
   &--active {
@@ -443,14 +508,14 @@
   font-size: $fs-sm;
   line-height: 1.9;
   letter-spacing: 0.06em;
-  color: $color-text-muted;
+  color: $color-text;
 }
 
 .focusPanel__includes {
   font-family: $font-input;
   font-size: $fs-xxs;
   letter-spacing: 0.1em;
-  color: $color-text-muted;
+  color: $color-text;
 }
 
 .focusPanel__note {
@@ -458,7 +523,7 @@
   font-size: $fs-xxs;
   line-height: 1.8;
   letter-spacing: 0.04em;
-  color: $color-text-muted;
+  color: $color-text;
   padding: $space-3 $space-4;
   border: 1px solid $color-border;
   border-radius: $radius-sm;
@@ -511,14 +576,14 @@
 .menuList__includes {
   font-family: $font-input;
   font-size: $fs-xxs;
-  color: $color-text-muted;
+  color: $color-text;
 }
 
 .menuList__duration {
   font-family: $font-input;
   font-size: $fs-xxs;
   letter-spacing: 0.04em;
-  color: $color-text-muted;
+  color: $color-text;
   flex-shrink: 0;
 }
 
@@ -583,7 +648,7 @@
   font-family: $font-input;
   font-size: $fs-xxs;
   letter-spacing: 0.04em;
-  color: $color-text-muted;
+  color: $color-text;
   flex-shrink: 0;
 }
 
@@ -622,13 +687,13 @@
   font-size: $fs-xxs;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: $color-text-muted;
+  color: $color-text;
 }
 
 .summary__empty {
   font-family: $font-text;
   font-size: $fs-sm;
-  color: $color-text-muted;
+  color: $color-text;
   letter-spacing: 0.04em;
 }
 
@@ -677,7 +742,7 @@
   font-family: $font-input;
   font-size: $fs-xs;
   letter-spacing: 0.08em;
-  color: $color-text-muted;
+  color: $color-text;
 }
 
 .summary__total {
@@ -691,7 +756,7 @@
   font-size: $fs-xxs;
   line-height: 1.8;
   letter-spacing: 0.04em;
-  color: $color-text-muted;
+  color: $color-text;
 }
 
 // ─── Contact form ─────────────────────────────────────────────────────────────
@@ -716,7 +781,7 @@
   font-family: $font-input;
   font-size: $fs-xs;
   letter-spacing: 0.08em;
-  color: $color-text-muted;
+  color: $color-text;
 }
 
 .contactForm__required {
@@ -730,14 +795,14 @@
   padding: 0 $space-4;
   font-family: $font-input;
   font-size: $fs-sm;
-  color: $color-text;
+  color: $color-text-muted;
   background: $color-bg;
   border: 1px solid $color-border;
   border-radius: $radius-sm;
   transition: border-color $transition-base;
 
   &::placeholder {
-    color: $color-text-muted;
+    color: $color-text;
     opacity: 0.6;
   }
 
@@ -769,7 +834,7 @@
   font-size: $fs-xs;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: $color-white;
+  color: $color-bg;
   background: $color-accent;
   border: 1px solid $color-accent;
   border-radius: $radius-sm;
@@ -802,21 +867,26 @@
   font-size: $fs-xs;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: $color-text-muted;
+  white-space: nowrap;
+  color: $color-text;
   background: transparent;
   border: 1px solid $color-border;
   border-radius: $radius-sm;
   cursor: pointer;
   transition: color $transition-base, border-color $transition-base;
-
+  
   &:hover {
     color: $color-text;
     border-color: $color-text;
   }
-
+  
   &:focus-visible {
     outline: 2px solid $color-accent;
     outline-offset: 3px;
+  }
+  
+  @media screen and (max-width: 374px) {
+    white-space: wrap;
   }
 }
 
@@ -855,7 +925,7 @@
   font-family: $font-input;
   font-size: $fs-xs;
   letter-spacing: 0.08em;
-  color: $color-text-muted;
+  color: $color-text;
   flex-shrink: 0;
   padding-top: 2px;
 }
@@ -909,7 +979,7 @@
   height: 56px;
   border-radius: 50%;
   background: $color-accent;
-  color: $color-white;
+  color: $color-bg;
   font-size: $fs-xl;
   font-family: $font-input;
 }
@@ -926,6 +996,6 @@
   font-family: $font-text;
   font-size: $fs-sm;
   line-height: 2;
-  color: $color-text-muted;
+  color: $color-text;
   letter-spacing: 0.06em;
 }

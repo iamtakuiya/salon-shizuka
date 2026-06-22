@@ -115,7 +115,8 @@ $h-active:   380px;
   object-position: 50% 20%;
   display: block;
   transition: transform 0.4s ease;
-
+  
+  border-radius: 10px;
   .avatarBtn:not(.avatarBtn--active):hover & {
     transform: scale(1.04);
   }
@@ -125,7 +126,7 @@ $h-active:   380px;
 // Appears on collapsed portraits so the user can still identify them
 .avatarName {
   position: absolute;
-  bottom: $space-2;
+  bottom: 0;
   left: 0;
   right: 0;
   text-align: center;
@@ -133,7 +134,7 @@ $h-active:   380px;
   font-size: $fs-xxs;
   letter-spacing: 0.1em;
   color: rgba($color-white, 0.85);
-  background: linear-gradient(transparent, rgba($color-text, 0.55));
+  background: linear-gradient(transparent, rgba($color-text, 0.75));
   padding: $space-4 $space-2 $space-2;
   pointer-events: none;
 }

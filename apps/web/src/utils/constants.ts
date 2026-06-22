@@ -6,6 +6,7 @@ export interface MenuItem {
   name: string;
   /** Short English label — used in booking confirmations and Redux state */
   nameEn?: string;
+  nameJa?: string;
   /** Shown in brackets next to the category or item title */
   includes?: string;
   price: number;
@@ -34,12 +35,12 @@ export interface MenuCategory {
 
 
 // ─── Menu data ───────────────────────────────────────────────────────────────
-import SERVICE01 from '@/assets/images/06.services/service-1-m.png';
-import SERVICE02 from '@/assets/images/06.services/service-2-m.png';
-import SERVICE03 from '@/assets/images/06.services/service-3-m.png';
-import SERVICE04 from '@/assets/images/06.services/service-4-m.png';
-import SERVICE05 from '@/assets/images/06.services/service-5-m.png';
-import SERVICE06 from '@/assets/images/06.services/service-6-m.png';
+import SERVICE01 from '@/assets/images/06.services/service-01.png';
+import SERVICE02 from '@/assets/images/06.services/service-02.png';
+import SERVICE03 from '@/assets/images/06.services/service-03.png';
+import SERVICE04 from '@/assets/images/06.services/service-04.png';
+import SERVICE05 from '@/assets/images/06.services/service-05.png';
+import SERVICE06 from '@/assets/images/06.services/service-06.png';
 
 export const MENU_CATEGORIES: MenuCategory[] = [
   {

@@ -40,7 +40,7 @@ export default function BookingSummary({
             <div className={styles.summary__rows}>
               {lineItems.map((item, i) => (
                 <div key={i} className={styles.summary__row}>
-                  <span className={styles.summary__itemName}>{item.name}</span>
+                  <span className={styles.summary__itemName}>{item.nameJa || item.name}</span>
                   <span className={styles.summary__itemPrice}>¥{item.price.toLocaleString()}</span>
                 </div>
               ))}

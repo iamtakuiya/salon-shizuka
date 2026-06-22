@@ -1,6 +1,6 @@
-import Image01 from '@/assets/images/07.voice/voice-1-m.png';
-import Image02 from '@/assets/images/07.voice/voice-2-m.png';
-import Image03 from '@/assets/images/07.voice/voice-3-m.png';
+import Image01 from '@/assets/images/07.voice/voice-01.png';
+import Image02 from '@/assets/images/07.voice/voice-02.png';
+import Image03 from '@/assets/images/07.voice/voice-03.png';
 
 
 // testimonials.ts
