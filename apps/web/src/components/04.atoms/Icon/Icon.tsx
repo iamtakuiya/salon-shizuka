@@ -4,6 +4,7 @@ import LinkedInIcon from '@/assets/icons/socials/LinkedIn.svg?react';
 import XIcon from '@/assets/icons/socials/X.svg?react';
 import YouTubeIcon from '@assets/icons/socials/YouTube.svg?react'
 
+
 const iconMap = {
   Facebook: FaceBookIcon,
   Instagram: InstagramIcon,

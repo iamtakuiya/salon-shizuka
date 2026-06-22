@@ -7,7 +7,7 @@ import salonLogo from "@/assets/svg/logo/logo.svg";
 import visaLogo from '@/assets/icons/payments/Visa.svg';
 import mastercardLogo from '@/assets/icons/payments/Mastercard.svg';
 import googlePayLogo from "@/assets/icons/payments/GooglePay.svg"; 
-import paypalLogo from '@/assets/icons/payments/Paypal.svg';
+import paypalLogo from '@/assets/icons/payments/PayPal.svg';
 import mapPinIcon from '@/assets/icons/info/Location.svg';
 import phoneIcon from '@/assets/icons/info/Support.svg';
 import mailIcon from '@/assets/icons/info/Feedback.svg';
