@@ -13,7 +13,7 @@
 
 // Soft neutral grouping — slightly off-white, no elevation
 .surface--muted {
-  background-color: darken($color-bg, 2%);
+  background-color: color.adjust($color-bg, $lightness: -2%);
 }
 
 // Elevated card — white background with shadow

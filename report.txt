@@ -1,0 +1,42 @@
+Salon Shizuka Fix & Build Report
+===============================
+
+Date: 2026-06-23
+Project: /Users/tk.code/Downloads/deploy-test/salon-shizuka
+
+Summary
+-------
+Fixed the web build failure, improved bundling, and created a deploy-ready output path.
+
+Work completed:
+- Corrected invalid JSON in `apps/web/tsconfig.json`.
+- Verified `npm run build:web` succeeded after the fix.
+- Added Vite chunk-splitting configuration in `apps/web/vite.config.ts`:
+  - `chunkSizeWarningLimit: 1000`
+  - manual chunks for `framework`, `gsap`, `axios`, `zod`, and shared vendor code
+  - finer splitting of app code into `pages-*`, `features-*`, `components-*`, and `layouts-*`
+- Migrated Sass deprecated `darken()` calls to `color.adjust()` in:
+  - `apps/web/src/components/02.surface/01.Surface/Surface.module.scss`
+  - `apps/web/src/components/03.feedback/04.LoadingBlock/LoadingBlock.module.scss`
+- Configured build output directory to `apps/web/deploy/` using `build.outDir`.
+- Added npm scripts:
+  - `apps/web/package.json` -> `build:deploy`
+  - root `package.json` -> `build:web:deploy`
+- Verified `npm run build:web:deploy` successfully builds the app into `apps/web/deploy/`.
+
+Commits created:
+- "Fix apps/web/tsconfig.json JSON syntax"
+- "Improve chunk splitting and migrate deprecated Sass darken() to color.adjust()"
+- "Import sass:color globally for SCSS and adjust build chunking"
+- "Split large web chunks into smaller groups and output build to deploy folder"
+
+Verification
+------------
+- `npm run build:web` succeeded.
+- `npm run build:web:deploy` succeeded.
+- Generated output is located in `apps/web/deploy/`.
+
+Notes
+-----
+- The build still generates some large image assets, but the JS/CSS chunking has been split further.
+- The root workspace now supports a dedicated deploy build command.

@@ -10,7 +10,7 @@
   background: linear-gradient(
     90deg,
     $color-border 25%,
-    darken($color-border, 4%) 50%,
+    color.adjust($color-border, $lightness: -4%) 50%,
     $color-border 75%
   );
   background-size: 800px 100%;
