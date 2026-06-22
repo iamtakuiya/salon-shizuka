@@ -1,7 +1,7 @@
 {
     "name": "salon-shizuka",
     "private": true,
-    "workspace": [
+    "workspaces": [
         "apps/*",
         "shared"
     ],
@@ -12,6 +12,7 @@
         "dev:web": "npm run dev --workspace=apps/web",
         "dev:api": "npm run dev --workspace=apps/api",
         "build:web": "npm run build --workspace=apps/web",
+        "build:web:deploy": "npm run build:deploy --workspace=apps/web",
         "build:api": "npm run build --workspace=apps/api",
         "type-check": "tsc --noEmit --project apps/web/tsconfig.json && tsc --noEmit --project apps/api/tsconfig.json",
         "test": "echo \"Error: no test specified\" && exit 1"

@@ -38,8 +38,8 @@ export const bookingService = {
 
     logger.info('Booking saved', { id: booking.id, total });
 
-    // Fire all notifications in parallel
-    // allSettled: if LINE fails, emails still go out
+    // Fire all notifications in parallel.
+    // allSettled: if LINE fails, emails still go out.
     const results = await Promise.allSettled([
       sendOwnerNotification({ ...data, total }),
       sendGuestConfirmation({ ...data, total }),
