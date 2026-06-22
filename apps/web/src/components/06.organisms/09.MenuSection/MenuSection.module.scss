@@ -18,11 +18,22 @@
   }
 }
 
+.menu__stack {
+  gap: 1.5rem;
+
+  @include tablet {
+    gap: 2.5rem;
+  }
+
+  @include laptop {
+    gap: $space-16;
+  }
+}
+
 // ─── Two-column layout ───────────────────────────────
 .menu__columns {
   display: flex;
   flex-direction: column;
-  gap: $space-8;
 
   @include tablet {
     flex-direction: row;
@@ -39,7 +50,7 @@
 
   @include tablet {
     flex: 1;
-    padding-inline: $space-8;
+    // padding-inline: $space-8;
   }
 }
 
@@ -53,5 +64,6 @@
     align-self: stretch;
     background-color: $color-border;
     flex-shrink: 0;
+    margin-inline: $space-8;
   }
 }

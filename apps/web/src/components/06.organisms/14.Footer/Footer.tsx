@@ -1,5 +1,4 @@
-import React from "react";
-import { Section, Container, Stack, Row, Box } from "@/components/01.primitives";
+ import { Section, Row, Box } from "@/components/01.primitives";
 import styles from "./Footer.module.scss"; // Enforced CSS modules usage pattern
 
 export interface FooterNavLinkProp {
