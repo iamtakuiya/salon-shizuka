@@ -15,15 +15,14 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@shared/*": ["../../shared/*"],
       "@store/*": ["../../store/*"],
       "@assets/*": ["./src/assets/*"],
-      "@styles/*": ["./src/styles/*"],
+      "@styles/*": ["./src/styles/*"]
     }
   },
-  "include": ["src", "src/**/*", "../../../a-scaffold"], // This covers everything inside src, including images.d.ts
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
