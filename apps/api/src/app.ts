@@ -22,6 +22,12 @@ app.get('/health', (_req, res) => {
   res.json({ status: 'ok', ts: new Date().toISOString() });
 });
 
+// To get the owner's LINE_OWNER_USER_ID
+// app.post('/webhook', (req, res) => {
+//   console.log(JSON.stringify(req.body, null, 2));
+//   res.sendStatus(200);
+// });
+
 // ─── Routes ──────────────────────────────────────────
 app.use('/api/booking',    bookingRoutes);
 app.use('/api/newsletter', newsletterRoutes);

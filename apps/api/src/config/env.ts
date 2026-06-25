@@ -1,5 +1,8 @@
 import { z } from 'zod';
 import dotenv from 'dotenv';
+
+// Load .env first so it is the default source, then allow .env.local to override local values.
+dotenv.config({ path: '.env' });
 dotenv.config({ path: '.env.local' });
 
 const envSchema = z.object({

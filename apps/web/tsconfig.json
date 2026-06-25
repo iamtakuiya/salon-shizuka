@@ -17,7 +17,7 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@shared/*": ["../../shared/*"],
+      "@shared/*": ["../shared/*"],
       "@store/*": ["../../store/*"],
       "@assets/*": ["./src/assets/*"],
       "@styles/*": ["./src/styles/*"]
