@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 import { env } from '../config/env';
 import { logger } from './logger.service';
 
-const transporter = nodemailer.createTransport({
+export let transporter: any = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     type: 'OAuth2',
@@ -12,6 +12,11 @@ const transporter = nodemailer.createTransport({
     refreshToken: env.GMAIL_REFRESH_TOKEN,
   },
 });
+
+// Helper for integration tests to inject a test transporter (Ethereal, SMTP mock, etc.)
+export function setTransporterForTest(t: any) {
+  transporter = t;
+}
 
 interface BookingData {
   name: string;
@@ -42,6 +47,29 @@ export async function sendOwnerNotification(booking: BookingData) {
     logger.info('Owner notification sent', { to: env.OWNER_EMAIL });
   } catch (err) {
     logger.error('Owner notification failed', { error: String(err) });
+    throw err;
+  }
+}
+
+export async function sendNewsletterNotification(email: string) {
+  try {
+    const info = await transporter.sendMail({
+      from: env.GMAIL_USER,
+      to: env.OWNER_EMAIL,
+      subject: `【ニュースレター登録】${email}`,
+      html: `
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #C9A96E;">新しいニュースレター購読者が登録しました</h2>
+          <p>購読者のメールアドレス:</p>
+          <p><strong>${email}</strong></p>
+          <p>ウェブサイトからの購読通知です。</p>
+        </div>
+      `,
+    });
+    logger.info('Newsletter owner notification sent', { to: env.OWNER_EMAIL, email });
+    return info;
+  } catch (err) {
+    logger.error('Newsletter owner notification failed', { error: String(err), email });
     throw err;
   }
 }

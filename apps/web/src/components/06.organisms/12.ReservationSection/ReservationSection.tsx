@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -74,11 +74,25 @@ export default function ReservationSection() {
   const [stage, setStage]             = useState<Stage>('form');
   const [submitting, setSubmitting]   = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const [isDesktop, setIsDesktop]     = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(min-width: 1024px)').matches : false
+  );
 
   // Calendar navigation state
   const today = new Date();
   const [calYear, setCalYear]   = useState(today.getFullYear());
   const [calMonth, setCalMonth] = useState(today.getMonth());
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const mediaQuery = window.matchMedia('(min-width: 1024px)');
+    const handleChange = (event: MediaQueryListEvent) => setIsDesktop(event.matches);
+
+    setIsDesktop(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   // React Hook Form (contact fields only)
   const {
@@ -258,8 +272,24 @@ export default function ReservationSection() {
                   />
                 </div>
 
-                {/* Summary + form visible inline on mobile/tablet; sidebar on desktop */}
-                <div className={styles.layout__inlineForm}>
+                {/* Summary + form visible inline on mobile/tablet; desktop uses the sidebar version */}
+                {!isDesktop && (
+                  <div className={styles.layout__inlineForm}>
+                    <BookingSummary
+                      selectedItems={selectedItems}
+                      selectedAddons={selectedAddonsForDisplay}
+                      total={total}
+                      register={register}
+                      errors={errors}
+                      onSubmit={handleFormSubmit}
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* ── Right column (desktop only) ── */}
+              {isDesktop && (
+                <aside className={styles.layout__sidebar} aria-label="予約サマリー">
                   <BookingSummary
                     selectedItems={selectedItems}
                     selectedAddons={selectedAddonsForDisplay}
@@ -268,20 +298,8 @@ export default function ReservationSection() {
                     errors={errors}
                     onSubmit={handleFormSubmit}
                   />
-                </div>
-              </div>
-
-              {/* ── Right column (desktop only) ── */}
-              <aside className={styles.layout__sidebar} aria-label="予約サマリー">
-                <BookingSummary
-                  selectedItems={selectedItems}
-                  selectedAddons={selectedAddonsForDisplay}
-                  total={total}
-                  register={register}
-                  errors={errors}
-                  onSubmit={handleFormSubmit}
-                />
-              </aside>
+                </aside>
+              )}
             </div>
           )}
         </Stack>

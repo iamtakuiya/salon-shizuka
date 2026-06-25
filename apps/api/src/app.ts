@@ -10,6 +10,7 @@ const app = express();
 
 // Enable trust proxy so express-rate-limit can see the real client IP behind Railway's proxy
 app.enable('trust proxy')
+app.set('trust proxy', 1);
 
 // ─── Middleware ───────────────────────────────────────
 app.use(cors({
