@@ -11,7 +11,7 @@ export const FOOTER_NAV_LINK: FooterNavLinkProp[] = [
   { href: "#home", text: "Home", isExistPage: true },
   { href: "#concept", text: "Concept", isExistPage: true },
   { href: "#menu", text: "Menu", isExistPage: true },
-  { href: "#gallery", text: "Hair Styles", isExistPage: true },
+  { href: "#style", text: "Style", isExistPage: true },
   { href: "#recruit", text: "Recruit", isExistPage: false },
 ];
 
