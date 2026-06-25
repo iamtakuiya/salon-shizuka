@@ -8,6 +8,9 @@ import newsletterRoutes from './routes/newsletter.routes';
 
 const app = express();
 
+// Enable trust proxy so express-rate-limit can see the real client IP behind Railway's proxy
+app.enable('trust proxy')
+
 // ─── Middleware ───────────────────────────────────────
 app.use(cors({
   origin: env.CORS_ORIGIN,
