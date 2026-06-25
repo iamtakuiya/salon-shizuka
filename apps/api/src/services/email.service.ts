@@ -3,6 +3,9 @@ import { env } from '../config/env';
 import { logger } from './logger.service';
 
 export let transporter: any = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
   service: 'gmail',
   auth: {
     type: 'OAuth2',
