@@ -8,6 +8,10 @@ import newsletterRoutes from './routes/newsletter.routes';
 
 const app = express();
 
+// Enable trust proxy so express-rate-limit can see the real client IP behind Railway's proxy
+app.enable('trust proxy')
+app.set('trust proxy', 1);
+
 // ─── Middleware ───────────────────────────────────────
 app.use(cors({
   origin: env.CORS_ORIGIN,
@@ -21,6 +25,12 @@ app.use(express.json({ limit: '10kb' })); // Limit payload size
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', ts: new Date().toISOString() });
 });
+
+// To get the owner's LINE_OWNER_USER_ID
+// app.post('/webhook', (req, res) => {
+//   console.log(JSON.stringify(req.body, null, 2));
+//   res.sendStatus(200);
+// });
 
 // ─── Routes ──────────────────────────────────────────
 app.use('/api/booking',    bookingRoutes);

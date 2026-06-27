@@ -1,11 +1,14 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '@/app/store';
-
 export interface ServiceItem {
   id: string;
   name: string;
   price: number;
+}
+
+// A minimal local type that avoids the circular import:
+interface RootState {
+  booking: BookingState;
 }
 
 interface BookingState {
