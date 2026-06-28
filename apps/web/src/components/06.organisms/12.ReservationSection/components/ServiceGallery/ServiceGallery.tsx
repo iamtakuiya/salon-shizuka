@@ -1,4 +1,23 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+/*
+  For tablet, Slider movement
+  Each movement should move two cards.
+  Page 0
+  [0][1]
+  ↓
+  Page 1
+  [2][3]
+  ↓
+  Page 2
+  [4][5]
+
+  const slideOffset = page * (100 / perPage);
+
+  Total page = 6 / 2
+  perPage = 2
+*/
+
+
+import { useState, useRef, useEffect, useCallback } from 'react';
 import styles from '../../ReservationSection.module.scss';
 import { MENU_CATEGORIES } from '@/utils/constants';
 import { DESKTOP_GRID_CAPACITY } from '@/utils/constants';
@@ -45,14 +64,16 @@ export default function ServiceGallery({
     return () => window.removeEventListener('resize', updateLayout);
   }, [updateLayout]);
 
+  // Change totalPages to reflect item-by-item sliding when not in desktop grid
   const totalPages = Math.ceil(total / perPage);
+
   const showSliderNav = !isGrid || total > DESKTOP_GRID_CAPACITY;
   const visibleStart = page * perPage;
   const visibleCats = isGrid
     ? MENU_CATEGORIES.slice(visibleStart, visibleStart + DESKTOP_GRID_CAPACITY)
     : MENU_CATEGORIES;
   
-    // Track translation using container percentage chunks
+  // Track translation using container percentage chunks
   // const slideOffset = isGrid ? 0 : page * (100 / perPage);
   
   const firstVisibleIndex = page * perPage;
@@ -78,16 +99,16 @@ export default function ServiceGallery({
 
       // Calculate the target card's left position relative to the track parent container
       // Exact center math: Card's offset positioning minus half of the empty structural viewport remaining space
-      const targetOffsetLeft = targetCard.offsetLeft - (viewportWidth - cardWidth) / 2;
+      // const targetOffsetLeft = targetCard.offsetLeft - (viewportWidth - cardWidth) / 2;
 
       // Scroll ONLY the viewport container horizontally
       viewport.scrollTo({
-        left: targetOffsetLeft,
+        // left: targetOffsetLeft,
+        left: targetCard.offsetLeft,
         behavior: 'smooth',
       });
     }
   }, [firstVisibleIndex, isGrid]);
-
 
   const goPrev = () => setPage((p) => (p === 0 ? totalPages - 1 : p - 1));
   const goNext = () => setPage((p) => (p === totalPages - 1 ? 0 : p + 1));
