@@ -316,6 +316,7 @@
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   scrollbar-width: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -351,17 +352,19 @@
   padding: 0;
   cursor: pointer;
   text-align: left;
-  flex-shrink: 0;
+  // flex-shrink: 0;
+  flex: 0 0 100%;
   
-  // THIS: Forces each slide card to lock exactly to the center ───
-  scroll-snap-align: center;
+  // THIS: Forces each slide card to lock exactly to the start ───
+  scroll-snap-align: start;
   
   // Mobile: Account for gap by subtracting from total track viewport width
   width: 100%;
 
   @include tablet {
     // 2 cards per view: split width cleanly down the middle minus half of the track gap
-    width: calc(50% - (#{$space-4} / 2));
+    // width: calc(50% - (#{$space-4} / 2));
+    flex: 0 0 calc(50% - (#{$space-4} / 2));
   }
 
   @include laptop {
