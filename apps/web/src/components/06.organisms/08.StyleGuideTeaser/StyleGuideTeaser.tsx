@@ -126,17 +126,17 @@ export function StyleGuideTeaser() {
     // const offset = activeItem.offsetLeft - parentWidth / 2 + activeItem.clientWidth / 1.67;
 
     // Centering Logic
-    // const offset =
-    //   activeItem.offsetLeft -
-    //   track.parentElement!.clientWidth / 2 +
-    //   activeItem.clientWidth / 1.67;
+    const offset =
+      activeItem.offsetLeft -
+      track.parentElement!.clientWidth / 2 +
+      activeItem.clientWidth / 1.67;
 
-    const ITEM_WIDTH = 166;  // OPTION 1
+    // const ITEM_WIDTH = 166;  // OPTION 1
     // const target = items[current]?.offsetLeft ?? 0;  // OPTION 2
 
     gsap.to(track, {
-      // x: -offset,
-      x: -(current * ITEM_WIDTH),  // OPTION 1
+      x: -offset,
+      // x: -(current * ITEM_WIDTH),  // OPTION 1
       // x: -target,  // OPTION 2
       duration: 0.8,
       ease: 'power3.out',
